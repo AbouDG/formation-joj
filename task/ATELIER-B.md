@@ -28,6 +28,16 @@ La fonctionnalité est terminée quand `/converge` répond **Converged** : la sp
 1. `git status` : l'arbre doit être propre, sur la branche de la journée, avec ton `CLAUDE.md` de l'atelier A commité.
 2. `/clear` dans Claude, pour repartir d'une conversation vide.
 
+## Relire avant « je valide »
+
+Les deux « je valide » de l'atelier sont ton vrai travail : ce que la spec oublie, aucun test ne le vérifiera. Avant chacun, prends 3 minutes avec la [grille de relecture](GRILLE-RELECTURE.md) : cinq questions pour la spec, trois pour le plan. Une seule réponse « non » suffit pour ne pas valider.
+
+Sur Bénévoles, une spec qui passe la grille dit au moins ce qui se passe quand :
+
+- on inscrit quelqu'un sur un créneau qui n'existe pas ;
+- on inscrit la dernière personne d'un créneau (la place restante passe à 0, sans refus) ;
+- la capacité vaut 0, ou la fin n'est pas après le début.
+
 ## Bénévoles, version réduite (spec `001`)
 
 **Pourquoi.** Chaque discipline a besoin de bénévoles pour accueillir le public et aider à l'organisation. Les responsables ouvrent des créneaux, et les bénévoles s'y inscrivent. Aujourd'hui tout se fait sur papier, et des créneaux débordent.
@@ -57,7 +67,7 @@ La fonctionnalité est terminée quand `/converge` répond **Converged** : la sp
 /spec Bénévoles : ouvrir un créneau (début, fin, capacité maximale d'au moins 1) pour une discipline existante, et inscrire un bénévole (nom, email) sur ce créneau. On ne peut pas inscrire quelqu'un sur un créneau complet : refus 409 avec le code SLOT_FULL. Pas d'écran : seulement l'API.
 ```
 
-**Réussi si** la spec a un scénario pour le cas nominal et un pour le créneau complet, le plan prévoit `SLOT_FULL` en `409`, et `/converge` répond « Converged ».
+**Réussi si** la spec a un scénario pour le cas nominal et un pour le créneau complet, elle passe la [grille de relecture](GRILLE-RELECTURE.md), le plan prévoit `SLOT_FULL` en `409`, et `/converge` répond « Converged ».
 
 ### Si tu as fini avant 12:05
 

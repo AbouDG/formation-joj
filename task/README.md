@@ -8,6 +8,7 @@ Ce dossier contient les énoncés de la journée. Ce fichier décrit le projet s
 | [ATELIER-A.md](ATELIER-A.md)                       | 10:15–11:15 | écrire le `CLAUDE.md` du projet, à partir de [CLAUDE.modele.md](CLAUDE.modele.md)   |
 | [ATELIER-B.md](ATELIER-B.md)                       | 11:15–12:15 | une petite fonctionnalité imposée (Bénévoles) avec la méthode spec → plan → TDD     |
 | [ATELIER-C.md](ATELIER-C.md)                       | 13:15–16:30 | ton application, sur le thème de ta table, avec les données de [donnees/](donnees/) |
+| [GRILLE-RELECTURE.md](GRILLE-RELECTURE.md)         | 11:15–16:30 | relire une spec et un plan avant chaque « je valide »                               |
 | [POUR-ALLER-PLUS-LOIN.md](POUR-ALLER-PLUS-LOIN.md) | après       | une fonctionnalité de plus pour s'entraîner : le programme des épreuves             |
 
 ## 1. L'application

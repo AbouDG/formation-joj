@@ -22,6 +22,7 @@ Tu repars du dépôt du matin, sur ta branche de la journée, avec ton `CLAUDE.m
 - **Tu pars du dépôt du matin** et tu suis le module `disciplines` comme modèle. Pas de nouvelle dépendance sans l'accord de ton coach.
 - **Une API d'abord.** Un écran seulement quand l'API de ta fonctionnalité est verte, et s'il reste du temps.
 - **Les données fournies** sont dans `task/donnees/<thème>/`. Pour les charger : quand ta table existe, copie le fichier dans `apps/api/data/` en le nommant comme ta table (`02-resultats.json` → table `resultats`), adapte les noms de colonnes si besoin, puis `pnpm db:seed` (après avoir arrêté `pnpm dev`). Les données sont fictives.
+- **Une spec relue avant d'être validée.** À 13:50, échange ta spec avec un voisin de table : chacun relit celle de l'autre avec la [grille de relecture](GRILLE-RELECTURE.md) et note ses « non ». Ton coach tranche ensuite les points restants.
 - **Bloqué plus de 10 minutes** : appelle ton coach. Un problème technique (licence, réseau, installation) part chez le référent technique.
 
 ## Comment les projets sont choisis
