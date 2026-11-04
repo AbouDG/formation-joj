@@ -4,11 +4,11 @@
 
 C'est la répétition de l'atelier C de l'après-midi : même cycle, mêmes commandes, sur un sujet imposé et plus petit.
 
-| Horaire     | Qui                 | Quoi                                                                                             |
-| ----------- | ------------------- | ------------------------------------------------------------------------------------------------ |
-| 11:15–11:35 | le formateur        | démonstration du cycle `/prd` → `/spec` → `/spec-plan` → `/tdd-task` → `/converge` sur Bénévoles |
-| 11:35–12:05 | toi                 | le même cycle sur Bénévoles, version réduite (ci-dessous)                                        |
-| 12:05–12:15 | toi et le relecteur | `/converge` : chaque scénario a un test, tout est vert, le relecteur donne son verdict           |
+| Horaire     | Quoi                                                                                   |
+| ----------- | -------------------------------------------------------------------------------------- |
+| 11:15–11:35 | regarder la démonstration du cycle sur Bénévoles                                       |
+| 11:35–12:05 | le même cycle sur Bénévoles, version réduite (ci-dessous)                              |
+| 12:05–12:15 | `/converge` : chaque scénario a un test, tout est vert, le relecteur donne son verdict |
 
 ## Le cycle
 

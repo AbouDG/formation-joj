@@ -1,14 +1,10 @@
 # Prise en main : comprendre et utiliser Claude Code
 
-**Horaire** : 09:30–10:15. **Objectif** : savoir à quoi sert chaque fonctionnalité de Claude Code, et l'avoir utilisée sur ce dépôt. Chaque manipulation part d'un problème : ce que l'agent fait mal si on le laisse faire, et ce qui le corrige.
+**Horaire** : 09:40–10:10 (30 min). **Objectif** : savoir à quoi sert chaque fonctionnalité de Claude Code, et l'avoir utilisée sur ce dépôt. Chaque manipulation part d'un problème : ce que l'agent fait mal si on le laisse faire, et ce qui le corrige. Le cycle `/spec` des ateliers B et C n'est pas au programme.
 
-| Horaire     | Quoi                                                                                           |
-| ----------- | ---------------------------------------------------------------------------------------------- |
-| 09:30–09:40 | le formateur présente Claude Code : sa boucle lire, agir, vérifier, et ses modes de permission |
-| 09:40–10:10 | toi : les neuf manipulations ci-dessous, sans le cycle `/spec` des ateliers B et C             |
-| 10:10–10:15 | quiz de 2 minutes, puis remise de la fiche à emporter (commandes, réflexes et définitions)     |
+**Avant de commencer**, lis [README.md](README.md) et le [glossaire](GLOSSAIRE.md) de ce dossier : ils donnent les mots du projet (couche, cas d'usage, `AppError`…) que Claude emploie dès la première manipulation.
 
-Lance `claude` à la racine du dépôt, après `pnpm install`. Pour découvrir le projet avant de commencer, lis [README.md](README.md) dans ce dossier.
+Lance `claude` à la racine du dépôt, après `pnpm install`.
 
 Avant la première manipulation, dans ton dépôt (le fork créé à la Mission 0), crée ta branche de la journée et envoie-la sur GitHub : `git switch -c journee`, puis `git push -u origin journee`. Tout ce que tu feras aujourd'hui (prise en main, `CLAUDE.md`, ateliers B et C) y sera commité.
 
@@ -18,7 +14,7 @@ Avant chaque manipulation : `git status` doit être propre (sinon `git stash -u`
 
 **Problème** : l'agent ne regarde pas les bons fichiers.
 
-1. Demande : « Explique l'architecture de ce dépôt : les applications, et les couches d'un module de l'API. »
+1. Garde le [glossaire](GLOSSAIRE.md) ouvert. Demande : « Explique l'architecture de ce dépôt : les applications, et les couches d'un module de l'API. »
 2. Puis : « Que vérifie `@apps/api/src/modules/disciplines/domain/discipline.ts` ? » (`@` attache le fichier : tape `@disc` et choisis-le dans la liste).
 
 **Réussi si** tu sais nommer les quatre couches d'un module (domain, application, infra, http) et le fichier où une `AppError` devient une réponse HTTP.

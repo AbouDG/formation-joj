@@ -15,7 +15,7 @@ Pose ces questions à Claude, une par une, et vérifie chaque réponse dans le c
 
 Pour aller vite : le module modèle est dans `apps/api/src/modules/disciplines/`, et le [README du dépôt](../README.md) décrit l'ordre pour ajouter une fonctionnalité.
 
-## 10:35–10:45 · Pourquoi un CLAUDE.md (formateur)
+## 10:35–10:45 · Pourquoi un CLAUDE.md
 
 Ce qui manquait à l'agent « sans harness » de la démo d'ouverture, c'est le contexte du projet. `CLAUDE.md` est la mémoire permanente du projet : Claude le lit au début de chaque session. Il dit ce qui est vrai dans ce dépôt (architecture, conventions, nommage) et renvoie vers le détail. Il reste court : une ligne inutile coûte du contexte à chaque session.
 
@@ -27,7 +27,7 @@ Ce qui manquait à l'agent « sans harness » de la démo d'ouverture, c'est le 
 
 **Règle d'or.** `CLAUDE.md` pour ce qui est toujours vrai et court, une skill pour une procédure. `CLAUDE.md` pointe vers les skills ; une skill ne répète jamais `CLAUDE.md`, elle le lit.
 
-Le formateur présente ensuite le guide de construction : le modèle [CLAUDE.modele.md](CLAUDE.modele.md) et ses cinq rubriques.
+Le modèle [CLAUDE.modele.md](CLAUDE.modele.md) sert de guide de construction : cinq rubriques, chacune avec ce qu'il faut y écrire et un exemple.
 
 ## 10:45–11:05 · Rédiger ton CLAUDE.md (20 min)
 
@@ -60,5 +60,3 @@ Ce qu'un bon `CLAUDE.md` contient : des règles vérifiables (« un controller n
 5. Quand `pnpm test` est vert, demande : « commite avec un message Conventional Commits ». Cette fois, on garde la fonctionnalité.
 
 **Réussi si** ton `CLAUDE.md` fait 60 lignes au plus et ses cinq rubriques sont remplies, la route des disciplines similaires est commitée avec ses tests verts, et Claude a appliqué au moins une convention écrite dans `CLAUDE.md` sans qu'elle soit dans le prompt.
-
-**En cas de retard**, le formateur te donne un `CLAUDE.md` déjà rempli, avec des erreurs à corriger : relis-le rubrique par rubrique au lieu de l'écrire.

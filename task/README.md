@@ -4,6 +4,7 @@ Ce dossier contient les énoncés de la journée. Ce fichier décrit le projet s
 
 | Fichier                                            | Quand       | Contenu                                                                                                                 |
 | -------------------------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------- |
+| [GLOSSAIRE.md](GLOSSAIRE.md)                       | avant       | les mots du projet et de la méthode, avec un exemple pris dans le dépôt                                                 |
 | [EXERCICES.md](EXERCICES.md)                       | 09:30–10:15 | prise en main : neuf manipulations pour comprendre et utiliser Claude Code                                              |
 | [ATELIER-A.md](ATELIER-A.md)                       | 10:15–11:15 | écrire le `CLAUDE.md` du projet, à partir de [CLAUDE.modele.md](CLAUDE.modele.md)                                       |
 | [ATELIER-B.md](ATELIER-B.md)                       | 11:15–12:15 | une petite fonctionnalité imposée (Bénévoles) avec la méthode spec → plan → TDD                                         |
@@ -92,6 +93,7 @@ La seule commande à retenir pour toi : **`pnpm check`**, qui vérifie tout le d
 
 ## 4. Le déroulé de la journée
 
+0. **Avant la journée** : lire ce fichier et le [glossaire](GLOSSAIRE.md).
 1. **09:30–10:15, [la prise en main](EXERCICES.md)** : chaque fonctionnalité de Claude Code par le problème qu'elle résout (@fichier, plan mode, confier et relire, Échap et `/rewind`, contexte, permissions, skills, hooks, sous-agent), avec un premier commit fait par Claude et relu.
 2. **10:15–11:15, [l'atelier A](ATELIER-A.md)** : explorer le code avec Claude, puis écrire le `CLAUDE.md` du projet (méthodologie, architecture, concepts, bonnes pratiques, nommage) et vérifier que Claude l'applique.
 3. **11:15–12:15, [l'atelier B](ATELIER-B.md)** : appliquer une fois le cycle complet, `/prd` → `/spec` → `/spec-plan` → `/tdd-task` → `/converge`, sur une petite fonctionnalité imposée : les bénévoles.
