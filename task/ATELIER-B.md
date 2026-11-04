@@ -1,25 +1,26 @@
 # Atelier B : de la spécification au code
 
-**Horaire** : 11:15–12:15 (1 h). **Objectif** : appliquer une fois le cycle complet sur une petite fonctionnalité de l'API. La spec décide quoi, les tests prouvent que c'est fait. C'est Claude qui écrit le code ; ton travail consiste à décrire le besoin, à relire et valider la spec puis le plan, et à vérifier le résultat.
+**Horaire** : 11:15–12:15 (1 h). **Objectif** : appliquer une fois le cycle complet sur une petite fonctionnalité de l'API. Le PRD dit pour qui et pourquoi, la spec décide quoi, les tests prouvent que c'est fait. C'est Claude qui écrit le code ; ton travail consiste à décrire le besoin, à relire et valider le PRD, la spec puis le plan, et à vérifier le résultat.
 
 C'est la répétition de l'atelier C de l'après-midi : même cycle, mêmes commandes, sur un sujet imposé et plus petit.
 
-| Horaire     | Qui                 | Quoi                                                                                    |
-| ----------- | ------------------- | --------------------------------------------------------------------------------------- |
-| 11:15–11:35 | le formateur        | démonstration du cycle `/spec` → `/spec-plan` → `/tdd-task` → `/converge` sur Bénévoles |
-| 11:35–12:05 | toi                 | le même cycle sur Bénévoles, version réduite (ci-dessous)                               |
-| 12:05–12:15 | toi et le relecteur | `/converge` : chaque scénario a un test, tout est vert, le relecteur donne son verdict  |
+| Horaire     | Qui                 | Quoi                                                                                             |
+| ----------- | ------------------- | ------------------------------------------------------------------------------------------------ |
+| 11:15–11:35 | le formateur        | démonstration du cycle `/prd` → `/spec` → `/spec-plan` → `/tdd-task` → `/converge` sur Bénévoles |
+| 11:35–12:05 | toi                 | le même cycle sur Bénévoles, version réduite (ci-dessous)                                        |
+| 12:05–12:15 | toi et le relecteur | `/converge` : chaque scénario a un test, tout est vert, le relecteur donne son verdict           |
 
 ## Le cycle
 
-Les quatre commandes s'enchaînent toujours dans cet ordre. Chacune s'arrête et attend ta réponse avant l'étape suivante.
+Les cinq commandes s'enchaînent toujours dans cet ordre. Chacune s'arrête et attend ta réponse avant l'étape suivante.
 
-| Étape | Tu tapes                  | Claude fait                                                                                                              | Toi, tu…                                                                                                                                    |
-| ----- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1     | `/spec <texte du besoin>` | écrit `specs/NNN-nom/spec.md` : user stories, scénarios `AS1`, `AS2`… au format Étant donné / Quand / Alors              | relis chaque scénario. Chaque règle de l'énoncé a-t-elle son scénario ? Le « Alors » est-il vérifiable ? Corrige, puis écris « je valide ». |
-| 2     | `/spec-plan`              | écrit `plan.md` : résumé, fichiers par couche, tables, erreurs, un test par scénario, six tâches au plus                 | vérifie les codes d'erreur et les statuts HTTP de l'énoncé, et que chaque scénario a un test prévu. Puis « je valide ».                     |
-| 3     | `/tdd-task`               | pour chaque tâche : écrit le test, prouve qu'il échoue (`pnpm tdd:red`), écrit le code, vérifie (`pnpm verify`), commite | regarde passer les tâches. Tu peux interrompre (`Échap`) et lancer `/tdd-task T02` pour une seule tâche.                                    |
-| 4     | `/converge`               | lance `pnpm spec:check --trace` et `pnpm check`, puis fait relire par le sous-agent `relecteur` dans un contexte vierge  | lis le verdict. Si des tâches de correction sont ajoutées, relance `/tdd-task`, puis `/converge`.                                           |
+| Étape | Tu tapes                 | Claude fait                                                                                                                                             | Toi, tu…                                                                                                                                    |
+| ----- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1     | `/prd <ton idée>`        | challenge ton idée (au plus 3 questions), puis écrit `specs/prd-nom.md` : problème, utilisateurs, proposition, mesure du succès, tranches `TR1`, `TR2`… | réponds à ses questions, lis ses objections. Le problème est-il précis ? La tranche 1 tient-elle dans le temps ? Puis « je valide ».        |
+| 2     | `/spec TR1 <précisions>` | écrit `specs/NNN-nom/spec.md` : user stories, scénarios `AS1`, `AS2`… au format Étant donné / Quand / Alors                                             | relis chaque scénario. Chaque règle de l'énoncé a-t-elle son scénario ? Le « Alors » est-il vérifiable ? Corrige, puis écris « je valide ». |
+| 3     | `/spec-plan`             | écrit `plan.md` : résumé, fichiers par couche, tables, erreurs, un test par scénario, six tâches au plus                                                | vérifie les codes d'erreur et les statuts HTTP de l'énoncé, et que chaque scénario a un test prévu. Puis « je valide ».                     |
+| 4     | `/tdd-task`              | pour chaque tâche : écrit le test, prouve qu'il échoue (`pnpm tdd:red`), écrit le code, vérifie (`pnpm verify`), commite                                | regarde passer les tâches. Tu peux interrompre (`Échap`) et lancer `/tdd-task T02` pour une seule tâche.                                    |
+| 5     | `/converge`              | lance `pnpm spec:check --trace` et `pnpm check`, puis fait relire par le sous-agent `relecteur` dans un contexte vierge                                 | lis le verdict. Si des tâches de correction sont ajoutées, relance `/tdd-task`, puis `/converge`.                                           |
 
 La fonctionnalité est terminée quand `/converge` répond **Converged** : la spec passe alors au statut `Implémentée`.
 
@@ -30,7 +31,7 @@ La fonctionnalité est terminée quand `/converge` répond **Converged** : la sp
 
 ## Relire avant « je valide »
 
-Les deux « je valide » de l'atelier sont ton vrai travail : ce que la spec oublie, aucun test ne le vérifiera. Avant chacun, prends 3 minutes avec la [grille de relecture](GRILLE-RELECTURE.md) : cinq questions pour la spec, trois pour le plan. Une seule réponse « non » suffit pour ne pas valider.
+Les trois « je valide » de l'atelier sont ton vrai travail : ce que la spec oublie, aucun test ne le vérifiera. Avant chacun, prends quelques minutes avec la [grille de relecture](GRILLE-RELECTURE.md) : cinq questions pour le PRD, cinq pour la spec, trois pour le plan. Sur Bénévoles, le texte du PRD est donné : 2 minutes suffisent pour le relire ; à l'atelier C, c'est ta vision, et c'est là que tu passeras le plus de temps. Une seule réponse « non » suffit pour ne pas valider.
 
 Sur Bénévoles, une spec qui passe la grille dit au moins ce qui se passe quand :
 
@@ -61,20 +62,28 @@ Sur Bénévoles, une spec qui passe la grille dit au moins ce qui se passe quand
 
 **Hors périmètre** : l'écran, la consultation d'un créneau et de ses inscrits, les doublons d'email, la désinscription, la modification ou la suppression d'un créneau, l'envoi d'un email de confirmation, les comptes des bénévoles.
 
-**Le texte à donner à `/spec`** (copie-le tel quel) :
+**Le texte à donner à `/prd`** (copie-le tel quel) :
 
 ```
-/spec Bénévoles : ouvrir un créneau (début, fin, capacité maximale d'au moins 1) pour une discipline existante, et inscrire un bénévole (nom, email) sur ce créneau. On ne peut pas inscrire quelqu'un sur un créneau complet : refus 409 avec le code SLOT_FULL. Pas d'écran : seulement l'API.
+/prd Bénévoles. Problème : chaque discipline a besoin de bénévoles pour accueillir le public ; les responsables de discipline gèrent les inscriptions sur papier, et des créneaux débordent. Utilisateurs : le responsable de discipline, qui ouvre des créneaux, et le bénévole, qui s'y inscrit. Proposition : le responsable ouvre un créneau avec une capacité, les bénévoles s'y inscrivent, et l'application refuse toute inscription au-delà de la capacité. Succès : pendant la démo, un créneau de capacité 2 accepte deux bénévoles et refuse le troisième. Tranche 1 : ouvrir un créneau et y inscrire un bénévole, jamais au-delà de la capacité. Tranche 2 : consulter un créneau et ses inscrits, sans inscrire deux fois le même email. Hors périmètre : l'écran, la désinscription, les comptes des bénévoles, les emails de confirmation.
 ```
 
-**Réussi si** la spec a un scénario pour le cas nominal et un pour le créneau complet, elle passe la [grille de relecture](GRILLE-RELECTURE.md), le plan prévoit `SLOT_FULL` en `409`, et `/converge` répond « Converged ».
+Le texte couvre chaque section : Claude ne devrait pas poser de question, mais il te donne ses objections. Lis-les, puis valide.
+
+**Le texte à donner à `/spec`** (copie-le tel quel, après la validation du PRD) :
+
+```
+/spec TR1 Bénévoles : ouvrir un créneau (début, fin, capacité maximale d'au moins 1) pour une discipline existante, et inscrire un bénévole (nom, email) sur ce créneau. On ne peut pas inscrire quelqu'un sur un créneau complet : refus 409 avec le code SLOT_FULL. Pas d'écran : seulement l'API.
+```
+
+**Réussi si** le PRD est validé avec deux tranches, la spec a un scénario pour le cas nominal et un pour le créneau complet, elle passe la [grille de relecture](GRILLE-RELECTURE.md), le plan prévoit `SLOT_FULL` en `409`, et `/converge` répond « Converged ».
 
 ### Si tu as fini avant 12:05
 
-Ajoute la seconde règle et la consultation, avec le même cycle (spec `002`, après `/clear`) :
+Ajoute la tranche 2 du PRD, la consultation et la seconde règle, avec le même cycle (spec `002`, après `/clear`) :
 
 ```
-/spec Bénévoles, suite : consulter un créneau avec ses horaires, sa capacité, ses places restantes et ses inscrits dans l'ordre d'inscription. On ne peut pas inscrire deux fois le même email sur un créneau, sans tenir compte des majuscules (awa@joj.sn et Awa@JOJ.sn sont le même email) : refus 409 avec le code VOLUNTEER_ALREADY_REGISTERED. Pas d'écran : seulement l'API.
+/spec TR2 Bénévoles, suite : consulter un créneau avec ses horaires, sa capacité, ses places restantes et ses inscrits dans l'ordre d'inscription. On ne peut pas inscrire deux fois le même email sur un créneau, sans tenir compte des majuscules (awa@joj.sn et Awa@JOJ.sn sont le même email) : refus 409 avec le code VOLUNTEER_ALREADY_REGISTERED. Pas d'écran : seulement l'API.
 ```
 
 ## 12:05 : l'heure de la relecture

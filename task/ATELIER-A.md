@@ -23,7 +23,7 @@ Ce qui manquait à l'agent « sans harness » de la démo d'ouverture, c'est le 
 | --------------------------------------- | ------------------------------------------------------- | ------------------------------------ |
 | `CLAUDE.md`                             | ce qui est vrai dans le projet : conventions, structure | à chaque session                     |
 | une skill (`.claude/skills/*/SKILL.md`) | comment faire une tâche, étape par étape                | seulement quand on lance la commande |
-| `specs/constitution.md`                 | les six principes de la méthode des ateliers B et C     | par les skills `/spec` à `/converge` |
+| `specs/constitution.md`                 | les six principes de la méthode des ateliers B et C     | par les skills `/prd` à `/converge`  |
 
 **Règle d'or.** `CLAUDE.md` pour ce qui est toujours vrai et court, une skill pour une procédure. `CLAUDE.md` pointe vers les skills ; une skill ne répète jamais `CLAUDE.md`, elle le lit.
 

@@ -2,14 +2,15 @@
 
 Ce dossier contient les énoncés de la journée. Ce fichier décrit le projet sur lequel tu vas travailler : ce que fait l'application, comment elle est construite, et ce qui a été mis en place pour développer avec Claude Code.
 
-| Fichier                                            | Quand       | Contenu                                                                             |
-| -------------------------------------------------- | ----------- | ----------------------------------------------------------------------------------- |
-| [EXERCICES.md](EXERCICES.md)                       | 09:30–10:15 | prise en main : neuf manipulations pour comprendre et utiliser Claude Code          |
-| [ATELIER-A.md](ATELIER-A.md)                       | 10:15–11:15 | écrire le `CLAUDE.md` du projet, à partir de [CLAUDE.modele.md](CLAUDE.modele.md)   |
-| [ATELIER-B.md](ATELIER-B.md)                       | 11:15–12:15 | une petite fonctionnalité imposée (Bénévoles) avec la méthode spec → plan → TDD     |
-| [ATELIER-C.md](ATELIER-C.md)                       | 13:15–16:30 | ton application, sur le thème de ta table, avec les données de [donnees/](donnees/) |
-| [GRILLE-RELECTURE.md](GRILLE-RELECTURE.md)         | 11:15–16:30 | relire une spec et un plan avant chaque « je valide »                               |
-| [POUR-ALLER-PLUS-LOIN.md](POUR-ALLER-PLUS-LOIN.md) | après       | une fonctionnalité de plus pour s'entraîner : le programme des épreuves             |
+| Fichier                                            | Quand       | Contenu                                                                                                                 |
+| -------------------------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------- |
+| [EXERCICES.md](EXERCICES.md)                       | 09:30–10:15 | prise en main : neuf manipulations pour comprendre et utiliser Claude Code                                              |
+| [ATELIER-A.md](ATELIER-A.md)                       | 10:15–11:15 | écrire le `CLAUDE.md` du projet, à partir de [CLAUDE.modele.md](CLAUDE.modele.md)                                       |
+| [ATELIER-B.md](ATELIER-B.md)                       | 11:15–12:15 | une petite fonctionnalité imposée (Bénévoles) avec la méthode spec → plan → TDD                                         |
+| [ATELIER-C.md](ATELIER-C.md)                       | 13:15–16:30 | ta solution au problème de ta table : ton PRD challengé, puis ton application, avec les données de [donnees/](donnees/) |
+| [PISTES-ATELIER-C.md](PISTES-ATELIER-C.md)         | 13:15–16:30 | des pistes, seulement si tu sèches après 10 minutes                                                                     |
+| [GRILLE-RELECTURE.md](GRILLE-RELECTURE.md)         | 11:15–16:30 | relire un PRD, une spec et un plan avant chaque « je valide »                                                           |
+| [POUR-ALLER-PLUS-LOIN.md](POUR-ALLER-PLUS-LOIN.md) | après       | une fonctionnalité de plus pour s'entraîner : le programme des épreuves                                                 |
 
 ## 1. L'application
 
@@ -67,18 +68,19 @@ Le dossier `.claude/` configure Claude Code pour ce dépôt. Tu n'as rien à ins
 
 **Des permissions.** Claude lance sans te demander les commandes de vérification (`pnpm test`, `pnpm verify`, `pnpm check`, `pnpm spec:*`, `pnpm tdd:*`). Pour tout le reste, et en particulier supprimer des fichiers ou installer des dépendances, il te demande la permission. La liste est dans `.claude/settings.json`.
 
-**Une méthode en quatre commandes (skills).** C'est le cœur des ateliers B et C :
+**Une méthode en cinq commandes (skills).** C'est le cœur des ateliers B et C :
 
-| Commande         | Ce qu'elle produit                                                                                              | Qui valide   |
-| ---------------- | --------------------------------------------------------------------------------------------------------------- | ------------ |
-| `/spec <besoin>` | `specs/NNN-nom/spec.md` : le **quoi** et le **pourquoi**, sans technique, avec des scénarios `AS1`, `AS2`…      | toi          |
-| `/spec-plan`     | `specs/NNN-nom/plan.md` : le **comment** (fichiers, tables, erreurs, tests) et six tâches au plus               | toi          |
-| `/tdd-task`      | le code, tâche par tâche : test écrit d'abord et vu en échec, code, vérification, un commit par tâche           | les tests    |
-| `/converge`      | le verdict final : chaque scénario a son test, tout le dépôt est vert, et un relecteur indépendant est d'accord | le relecteur |
+| Commande      | Ce qu'elle produit                                                                                                                                                                       | Qui valide              |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
+| `/prd <idée>` | `specs/prd-nom.md` : ta **vision** sur une page (pour qui, quel problème, ta solution, la mesure du succès), découpée en tranches `TR1`, `TR2`… Claude la challenge, il ne l'invente pas | toi, après un challenge |
+| `/spec TRn`   | `specs/NNN-nom/spec.md` : le **quoi** d'une tranche, sans technique, avec des scénarios `AS1`, `AS2`…                                                                                    | toi                     |
+| `/spec-plan`  | `specs/NNN-nom/plan.md` : le **comment** (fichiers, tables, erreurs, tests) et six tâches au plus                                                                                        | toi                     |
+| `/tdd-task`   | le code, tâche par tâche : test écrit d'abord et vu en échec, code, vérification, un commit par tâche                                                                                    | les tests               |
+| `/converge`   | le verdict final : chaque scénario a son test, tout le dépôt est vert, et un relecteur indépendant est d'accord                                                                          | le relecteur            |
 
 **Un relecteur.** Le sous-agent `relecteur` relit le travail dans un contexte vierge : il ne voit ni la conversation ni l'avis de Claude, seulement le code, la spec et le plan. Il répond « Converged » ou liste les écarts, avec le fichier et la ligne.
 
-**Des règles communes.** `specs/constitution.md` contient six principes que les quatre commandes appliquent : la spec ne parle pas de technique, aucun code sans test vu en échec, chaque scénario a un test titré par son identifiant (`001-AS2: …`), le domaine reste pur, une tâche fait un commit, celui qui produit ne valide pas.
+**Des règles communes.** `specs/constitution.md` contient six principes que les cinq commandes appliquent : le PRD porte la vision de l'humain et la spec en réalise une tranche, sans technique ; aucun code sans test vu en échec, chaque scénario a un test titré par son identifiant (`001-AS2: …`), le domaine reste pur, une tâche fait un commit, celui qui produit ne valide pas.
 
 **Des scripts d'outillage** (`tools/sdd/`), lancés par les commandes ci-dessus. Tu n'as pas à les lancer toi-même, mais tu les verras passer :
 
@@ -92,7 +94,7 @@ La seule commande à retenir pour toi : **`pnpm check`**, qui vérifie tout le d
 
 1. **09:30–10:15, [la prise en main](EXERCICES.md)** : chaque fonctionnalité de Claude Code par le problème qu'elle résout (@fichier, plan mode, confier et relire, Échap et `/rewind`, contexte, permissions, skills, hooks, sous-agent), avec un premier commit fait par Claude et relu.
 2. **10:15–11:15, [l'atelier A](ATELIER-A.md)** : explorer le code avec Claude, puis écrire le `CLAUDE.md` du projet (méthodologie, architecture, concepts, bonnes pratiques, nommage) et vérifier que Claude l'applique.
-3. **11:15–12:15, [l'atelier B](ATELIER-B.md)** : appliquer une fois le cycle complet, `/spec` → `/spec-plan` → `/tdd-task` → `/converge`, sur une petite fonctionnalité imposée : les bénévoles.
-4. **13:15–16:30, [l'atelier C](ATELIER-C.md)** : construire seul ton application sur le thème de ta table (résultats et médailles, guide touristique de Dakar, ou mobilité et covoiturage), avec le même cycle.
+3. **11:15–12:15, [l'atelier B](ATELIER-B.md)** : appliquer une fois le cycle complet, `/prd` → `/spec` → `/spec-plan` → `/tdd-task` → `/converge`, sur une petite fonctionnalité imposée : les bénévoles.
+4. **13:15–16:30, [l'atelier C](ATELIER-C.md)** : imaginer ta solution au problème de ta table (résultats et médailles, guide touristique de Dakar, ou mobilité et covoiturage), la défendre dans un PRD challengé par un voisin et ton coach, puis la construire avec le même cycle.
 
 Tout se fait dans ton propre dépôt GitHub (le fork créé à la Mission 0), sur une seule branche créée au début de la prise en main : ton `CLAUDE.md` de l'atelier A sert donc aussi aux ateliers B et C, et tu repars avec l'ensemble.

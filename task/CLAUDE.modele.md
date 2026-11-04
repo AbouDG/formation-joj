@@ -13,7 +13,7 @@ Application d'organisation des JOJ Dakar 2026 : une API NestJS (`apps/api`), un 
 <!--
 Comment on découpe, planifie et valide une tâche. Trois à cinq règles.
 Exemples :
-- Toute fonctionnalité suit le cycle /spec → /spec-plan → /tdd-task → /converge (voir specs/constitution.md).
+- Toute fonctionnalité suit le cycle /prd → /spec → /spec-plan → /tdd-task → /converge (voir specs/constitution.md).
 - Un test d'abord, vu en échec, puis le code minimal ; `pnpm verify` avant chaque commit.
 - Une tâche = un commit Conventional Commits.
 -->

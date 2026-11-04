@@ -1,6 +1,6 @@
 # Pour aller plus loin : le programme des épreuves
 
-Une fonctionnalité de plus, pour t'entraîner à la méthode après la journée (ou si tu as fini l'atelier C en avance). Même cycle que les ateliers B et C : `/spec` → `/spec-plan` → `/tdd-task` → `/converge`, sur ta branche, après `/clear`. Ses règles sont plus difficiles à bien formuler que celles des bénévoles : c'est l'intérêt de l'exercice.
+Une fonctionnalité de plus, pour t'entraîner à la méthode après la journée (ou si tu as fini l'atelier C en avance). Même cycle que les ateliers B et C : `/prd` → `/spec` → `/spec-plan` → `/tdd-task` → `/converge`, sur ta branche, après `/clear`. Ses règles sont plus difficiles à bien formuler que celles des bénévoles : c'est l'intérêt de l'exercice.
 
 ## Programme des épreuves (environ 50 minutes)
 
@@ -30,10 +30,12 @@ Note la différence entre les deux statuts. `409` (CONFLICT) signale un conflit 
 
 **Hors périmètre** : l'écran, la modification ou la suppression d'une épreuve, une liste officielle des lieux (le lieu reste un texte libre), les fuseaux horaires autres que celui de Dakar, la billetterie et les résultats.
 
-**Le texte à donner à `/spec`** (copie-le tel quel, après `/clear`) :
+**Le texte à donner à `/prd`** (après `/clear`). Ici, c'est à toi de l'écrire, à partir du « Pourquoi » ci-dessus : pour qui, quel problème, ta proposition, comment on sait que ça marche, et une tranche 1 qui contient les deux règles. Claude te challengera sur ce qui manque.
+
+**Le texte à donner à `/spec`** (copie-le tel quel, après la validation du PRD) :
 
 ```
-/spec Programme des épreuves : programmer une épreuve (nom, lieu en texte libre, début, fin) pour une discipline existante, et consulter le programme d'une journée, toutes épreuves confondues, trié par heure de début. Deux épreuves ne peuvent pas se chevaucher dans le même lieu ; une épreuve peut commencer à l'heure exacte où la précédente finit ; le lieu se compare sans tenir compte des majuscules ni des espaces autour : refus 409 avec le code VENUE_ALREADY_BOOKED. Une épreuve doit se dérouler entièrement pendant les Jeux, du 31 octobre 2026 à 0 h jusqu'au 13 novembre 2026 inclus (avant le 14 novembre à 0 h), heure de Dakar (UTC) : refus 422 avec le code EVENT_OUTSIDE_GAMES. Pas d'écran : seulement l'API.
+/spec TR1 Programme des épreuves : programmer une épreuve (nom, lieu en texte libre, début, fin) pour une discipline existante, et consulter le programme d'une journée, toutes épreuves confondues, trié par heure de début. Deux épreuves ne peuvent pas se chevaucher dans le même lieu ; une épreuve peut commencer à l'heure exacte où la précédente finit ; le lieu se compare sans tenir compte des majuscules ni des espaces autour : refus 409 avec le code VENUE_ALREADY_BOOKED. Une épreuve doit se dérouler entièrement pendant les Jeux, du 31 octobre 2026 à 0 h jusqu'au 13 novembre 2026 inclus (avant le 14 novembre à 0 h), heure de Dakar (UTC) : refus 422 avec le code EVENT_OUTSIDE_GAMES. Pas d'écran : seulement l'API.
 ```
 
 **Points à surveiller en relisant**, car ce sont les erreurs les plus fréquentes sur cette fonctionnalité :
