@@ -1,9 +1,9 @@
 # Constitution
 
-Six principes, lus par chaque skill (`/spec`, `/spec-plan`, `/tdd-task`, `/converge`). Le CLAUDE.md du dépôt, s'il existe, s'applique aussi ; les skills ne le répètent pas.
+Six principes, lus par chaque skill (`/prd`, `/spec`, `/spec-plan`, `/tdd-task`, `/converge`). Le CLAUDE.md du dépôt, s'il existe, s'applique aussi ; les skills ne le répètent pas.
 
-1. **La spec dit le quoi et le pourquoi, sans technique. Le plan dit le comment.**
-   Pas de route, de table ni de composant dans `spec.md` ; pas de nouveau besoin dans `plan.md`.
+1. **Le PRD dit pour qui et pourquoi, et découpe en tranches. La spec dit le quoi d'une tranche, sans technique. Le plan dit le comment.**
+   La vision du PRD est celle de l'humain : l'agent la challenge, il ne l'invente pas. Pas de besoin dans `spec.md` hors de sa tranche ; pas de route, de table ni de composant dans `spec.md` ; pas de nouveau besoin dans `plan.md`.
 
 2. **Test d'abord.**
    Aucun code de production sans un test vu en échec pour la bonne raison : `pnpm tdd:red <fichier>` le prouve.

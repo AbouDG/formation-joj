@@ -1,6 +1,7 @@
 # NNN — Nom de la fonctionnalité
 
 **Statut** : Brouillon
+**PRD** : specs/prd-nom.md, TR1
 
 ## Contexte
 

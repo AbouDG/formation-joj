@@ -146,16 +146,18 @@ Côté git, lefthook lance `pnpm verify --staged` avant chaque commit : format, 
 
 ## Méthode
 
-Développement guidé par la spec, en quatre commandes Claude Code et deux validations humaines :
+Développement guidé par la spec, en cinq commandes Claude Code et trois validations humaines :
 
 ```
-/spec <besoin>  → specs/NNN-nom/spec.md (Brouillon) ── tu relis et valides → Validée
+/prd <idée>     → specs/prd-nom.md : la vision, en tranches TR1, TR2… ── challengée, tu valides → Validé
+/spec TRn       → specs/NNN-nom/spec.md (Brouillon) ── tu relis et valides → Validée
 /spec-plan      → plan.md : fichiers, erreurs, tests, 6 tâches au plus ── tu valides → Validé
 /tdd-task [Tnn] → pour chaque tâche : test rouge → code → vert → un commit
 /converge       → traçabilité + pnpm check + relecteur → « Converged » (spec Implémentée)
 ```
 
-- **`/spec <besoin>`** : le quoi et le pourquoi, sans technique, avec des scénarios `AS1`, `AS2`…
+- **`/prd <idée>`** : pour qui, quel problème, quelle solution, et le découpage en tranches ; Claude pose des questions et dit où la vision est faible, sans la remplacer.
+- **`/spec TRn`** : le quoi d'une tranche du PRD, sans technique, avec des scénarios `AS1`, `AS2`…
 - **`/spec-plan`** : le comment, sur le modèle du module `disciplines`, un test prévu par scénario.
 - **`/tdd-task`** : une tâche (`/tdd-task T03`) ou toutes ; `pnpm tdd:red` prouve que le test échoue pour la bonne raison.
 - **`/converge`** : si un manque reste, il devient une tâche ; après deux passages, c'est toi qui tranches.
