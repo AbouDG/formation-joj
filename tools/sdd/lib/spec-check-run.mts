@@ -1,11 +1,19 @@
 /**
- * `pnpm spec:check [specs/NNN-nom | NNN] [--trace]` : lit les specs sur le disque et rend un
- * rapport. Sans dossier, vérifie toutes les specs ; avec --trace, ajoute la matrice
- * scénario → tests.
+ * `pnpm spec:check [specs/NNN-nom | NNN | specs/prd-nom.md] [--trace]` : lit les PRD et les specs
+ * sur le disque et rend un rapport. Sans argument, vérifie tous les PRD et toutes les specs ; avec
+ * --trace, ajoute la matrice scénario → tests.
  */
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
-import { checkPlan, checkSpec, type Problem, scenarios } from './spec-format.mts';
+import {
+  checkPlan,
+  checkPrd,
+  checkSpec,
+  prdLink,
+  type Problem,
+  scenarios,
+  tranches,
+} from './spec-format.mts';
 import { type Citation, citations, isTestFile, trace } from './trace.mts';
 
 export interface RunResult {
@@ -14,6 +22,7 @@ export interface RunResult {
 }
 
 const SPEC_DIR = /^(\d{3})-[a-z0-9-]+$/;
+const PRD_FILE = /^prd-[a-z0-9-]+\.md$/;
 const TEST_ROOTS = ['apps', 'packages'];
 const SKIPPED_DIRS = new Set(['node_modules', 'dist', 'coverage', '.data']);
 
@@ -29,6 +38,33 @@ function specDirs(root: string): string[] {
     .filter((name) => SPEC_DIR.test(name) && statSync(join(specs, name)).isDirectory())
     .sort()
     .map((name) => `specs/${name}`);
+}
+
+function prdFiles(root: string): string[] {
+  const specs = join(root, 'specs');
+  if (!existsSync(specs)) return [];
+  return readdirSync(specs)
+    .filter((name) => PRD_FILE.test(name))
+    .sort()
+    .map((name) => `specs/${name}`);
+}
+
+/** Le PRD cité par la spec existe, et la tranche y figure. */
+function checkLink(root: string, specFile: string, spec: string): Problem[] {
+  const link = prdLink(spec);
+  if (!link) return [];
+  if (!existsSync(join(root, link.file))) {
+    return [{ file: specFile, line: link.line, message: `${link.file} introuvable` }];
+  }
+  const ids = tranches(readFileSync(join(root, link.file), 'utf8')).map((t) => t.id);
+  if (ids.includes(link.tranche)) return [];
+  return [
+    {
+      file: specFile,
+      line: link.line,
+      message: `la tranche ${link.tranche} n'existe pas dans ${link.file}`,
+    },
+  ];
 }
 
 function testFiles(root: string): string[] {
@@ -61,21 +97,37 @@ export function runSpecCheck(root: string, args: string[]): RunResult {
     ok = false;
   }
 
+  let prds = prdFiles(root);
   let dirs = specDirs(root);
   if (target) {
     const wanted = target.replace(/\\/g, '/').replace(/\/$/, '');
-    dirs = dirs.filter(
-      (dir) =>
-        dir === wanted || dir.slice('specs/'.length).startsWith(wanted.replace(/^specs\//, '')),
-    );
-    if (dirs.length === 0) {
+    prds = prds.filter((file) => file === wanted || file === `specs/${wanted}`);
+    dirs =
+      prds.length > 0
+        ? []
+        : dirs.filter(
+            (dir) =>
+              dir === wanted ||
+              dir.slice('specs/'.length).startsWith(wanted.replace(/^specs\//, '')),
+          );
+    if (prds.length === 0 && dirs.length === 0) {
       return {
         ok: false,
-        output: `aucune spec ne correspond à « ${target} » (dossiers specs/NNN-nom)`,
+        output: `aucune spec ne correspond à « ${target} » (dossiers specs/NNN-nom, ou specs/prd-nom.md)`,
       };
     }
   }
-  if (dirs.length === 0) {
+
+  for (const file of prds) {
+    const problems = checkPrd(file, readFileSync(join(root, file), 'utf8'));
+    if (problems.length > 0) {
+      out.push(`${file} : ${problems.length} problème(s)`, ...problems.map(format));
+      ok = false;
+    } else {
+      out.push(`${file} : PRD conforme`);
+    }
+  }
+  if (prds.length === 0 && dirs.length === 0) {
     out.push('aucune spec dans specs/ : rien à vérifier.');
     return { ok, output: out.join('\n') };
   }
@@ -95,7 +147,7 @@ export function runSpecCheck(root: string, args: string[]): RunResult {
     }
     const spec = readFileSync(join(root, specFile), 'utf8');
     const ids = scenarios(spec).map((s) => s.id);
-    const problems = checkSpec(specFile, spec, number);
+    const problems = [...checkSpec(specFile, spec, number), ...checkLink(root, specFile, spec)];
     const hasPlan = existsSync(join(root, planFile));
     if (hasPlan) {
       problems.push(

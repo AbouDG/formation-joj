@@ -1,7 +1,15 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
-import { PLAN, SPEC } from './fixtures.mts';
-import { checkPlan, checkSpec, scenarios, tasks } from './spec-format.mts';
+import { PLAN, PRD, SPEC } from './fixtures.mts';
+import {
+  checkPlan,
+  checkPrd,
+  checkSpec,
+  prdLink,
+  scenarios,
+  tasks,
+  tranches,
+} from './spec-format.mts';
 
 const messages = (problems: { message: string }[]) => problems.map((p) => p.message);
 
@@ -183,5 +191,55 @@ describe('checkPlan', () => {
       ids,
     );
     assert.match(messages(problems).join(), /section « Erreurs » absente/);
+  });
+});
+
+describe('checkPrd', () => {
+  it('accepts a well-formed PRD and reads its slices', () => {
+    assert.deepEqual(checkPrd('prd.md', PRD), []);
+    assert.deepEqual(tranches(PRD), [
+      { id: 'TR1', line: 23 },
+      { id: 'TR2', line: 27 },
+    ]);
+  });
+
+  it('requires the title, a known status and every section', () => {
+    const problems = messages(
+      checkPrd(
+        'prd.md',
+        PRD.replace('# PRD — Bénévoles', '# Bénévoles')
+          .replace('Brouillon', 'Validée')
+          .replace('## Mesure du succès', '## Autre'),
+      ),
+    ).join('\n');
+    assert.match(problems, /« # PRD — Nom du produit »/);
+    assert.match(problems, /statut « Validée » inconnu.*Brouillon, Validé/);
+    assert.match(problems, /section « Mesure du succès » absente/);
+  });
+
+  it('requires at least one slice, without duplicates', () => {
+    const none = PRD.replace(/### TR[\s\S]*?(?=## Hors)/, '');
+    assert.match(messages(checkPrd('prd.md', none)).join(), /aucune tranche/);
+    const twice = PRD.replace('### TR2 —', '### TR1 —');
+    assert.match(messages(checkPrd('prd.md', twice)).join(), /TR1 en double/);
+  });
+
+  it('limits the PRD to one page of 50 lines', () => {
+    const long = PRD + '\n'.repeat(20);
+    assert.match(messages(checkPrd('prd.md', long)).join(), /57 lignes \(50 au plus\)/);
+  });
+});
+
+describe('prdLink', () => {
+  it('reads the PRD and the slice a spec implements', () => {
+    const spec = SPEC.replace(
+      '**Statut** : Brouillon',
+      '**Statut** : Brouillon\n**PRD** : specs/prd-benevoles.md, TR1',
+    );
+    assert.deepEqual(prdLink(spec), { file: 'specs/prd-benevoles.md', tranche: 'TR1', line: 4 });
+  });
+
+  it('is absent from a spec written without a PRD', () => {
+    assert.equal(prdLink(SPEC), undefined);
   });
 });

@@ -3,7 +3,7 @@ import { mkdirSync, mkdtempSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { describe, it } from 'node:test';
-import { PLAN, SPEC } from './fixtures.mts';
+import { PLAN, PRD, SPEC } from './fixtures.mts';
 import { runSpecCheck } from './spec-check-run.mts';
 
 /** Un dépôt factice : chemin relatif → contenu. */
@@ -17,6 +17,8 @@ function repo(files: Record<string, string>): string {
 }
 
 const CONSTITUTION = { 'specs/constitution.md': '# Constitution\n' };
+const linked = (tranche: string, prd = 'specs/prd-benevoles.md') =>
+  SPEC.replace('**Statut** : Brouillon', `**Statut** : Brouillon\n**PRD** : ${prd}, ${tranche}`);
 const TESTS = [
   "it('001-AS1: registers a volunteer', () => {});",
   "it('001-AS2: rejects a full slot', () => {});",
@@ -97,5 +99,57 @@ describe('runSpecCheck', () => {
     assert.equal(result.ok, false);
     assert.match(result.output, /001-AS2 → \(aucun test\)/);
     assert.match(result.output, /001-AS2 n'a aucun test/);
+  });
+
+  it('checks every PRD, alone or with the specs', () => {
+    const root = repo({ ...CONSTITUTION, 'specs/prd-benevoles.md': PRD });
+    const result = runSpecCheck(root, []);
+    assert.equal(result.ok, true, result.output);
+    assert.match(result.output, /specs\/prd-benevoles\.md : PRD conforme/);
+    const broken = repo({
+      ...CONSTITUTION,
+      'specs/prd-benevoles.md': PRD.replace(/### TR\d/g, '### X'),
+    });
+    assert.match(runSpecCheck(broken, []).output, /specs\/prd-benevoles\.md:1 aucune tranche/);
+  });
+
+  it('checks only the PRD given by its file', () => {
+    const root = repo({
+      ...CONSTITUTION,
+      'specs/prd-benevoles.md': PRD,
+      'specs/001-benevoles/spec.md': 'cassée',
+    });
+    const result = runSpecCheck(root, ['specs/prd-benevoles.md']);
+    assert.equal(result.ok, true, result.output);
+    assert.doesNotMatch(result.output, /001-benevoles/);
+  });
+
+  it('accepts a spec that implements an existing slice of a PRD', () => {
+    const root = repo({
+      ...CONSTITUTION,
+      'specs/prd-benevoles.md': PRD,
+      'specs/001-benevoles/spec.md': linked('TR2'),
+    });
+    const result = runSpecCheck(root, ['001']);
+    assert.equal(result.ok, true, result.output);
+  });
+
+  it('rejects a spec linked to a missing PRD or slice', () => {
+    const root = repo({
+      ...CONSTITUTION,
+      'specs/prd-benevoles.md': PRD,
+      'specs/001-benevoles/spec.md': linked('TR3'),
+      'specs/002-medailles/spec.md': linked('TR1', 'specs/prd-medailles.md').replace(
+        '# 001',
+        '# 002',
+      ),
+    });
+    const result = runSpecCheck(root, []);
+    assert.equal(result.ok, false);
+    assert.match(
+      result.output,
+      /001-benevoles\/spec\.md:4 la tranche TR3 n'existe pas dans specs\/prd-benevoles\.md/,
+    );
+    assert.match(result.output, /002-medailles\/spec\.md:4 specs\/prd-medailles\.md introuvable/);
   });
 });

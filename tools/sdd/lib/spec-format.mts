@@ -1,5 +1,6 @@
 /**
- * Lecture et vérification des fichiers d'une spec : spec.md et plan.md (qui contient les tâches).
+ * Lecture et vérification des fichiers de la méthode : le PRD d'un produit (specs/prd-nom.md),
+ * puis, pour chaque tranche, spec.md et plan.md (qui contient les tâches).
  * Logique pure : aucun accès au disque ici.
  */
 
@@ -24,6 +25,17 @@ export interface Task {
 
 export const SPEC_STATUSES = ['Brouillon', 'Validée', 'Implémentée'] as const;
 export const PLAN_STATUSES = ['Brouillon', 'Validé'] as const;
+export const PRD_STATUSES = ['Brouillon', 'Validé'] as const;
+
+const PRD_SECTIONS = [
+  'Problème',
+  'Utilisateurs',
+  'Proposition',
+  'Mesure du succès',
+  'Tranches',
+  'Hors périmètre',
+  'Hypothèses et risques',
+];
 
 const SPEC_SECTIONS = [
   'Contexte',
@@ -40,11 +52,14 @@ const PLAN_SECTIONS = [
   'Tests par scénario',
   'Tâches',
 ];
+const MAX_PRD_LINES = 50;
 const MAX_SPEC_LINES = 60;
 const MAX_TASKS = 6;
 
 const STATUS = /^\*\*Statut\*\*\s*:\s*(.*?)\s*$/;
 const SCENARIO = /^### AS([1-9]\d*) — \S/;
+const TRANCHE = /^### TR([1-9]\d*) — \S/;
+const PRD_LINK = /^\*\*PRD\*\*\s*:\s*(specs\/prd-[a-z0-9-]+\.md)\s*,\s*(TR[1-9]\d*)\s*$/;
 const TASK = /^- \[( |x)\] (T\d{2}) \[(\d{3})-(AS[1-9]\d*(?:, AS[1-9]\d*)*)\] (\S.*)$/;
 
 interface Line {
@@ -79,6 +94,22 @@ export function scenarios(text: string): { id: string; line: number }[] {
     const match = SCENARIO.exec(raw);
     return match ? [{ id: `AS${match[1]}`, line }] : [];
   });
+}
+
+export function tranches(text: string): { id: string; line: number }[] {
+  return lines(text).flatMap(({ text: raw, line }) => {
+    const match = TRANCHE.exec(raw);
+    return match ? [{ id: `TR${match[1]}`, line }] : [];
+  });
+}
+
+/** La ligne « **PRD** : specs/prd-nom.md, TR1 » d'une spec, si elle en a une. */
+export function prdLink(text: string): { file: string; tranche: string; line: number } | undefined {
+  for (const { text: raw, line } of lines(text)) {
+    const match = PRD_LINK.exec(raw);
+    if (match?.[1] && match[2]) return { file: match[1], tranche: match[2], line };
+  }
+  return undefined;
 }
 
 export function tasks(text: string): Task[] {
@@ -130,6 +161,35 @@ function checkSections(file: string, text: string, required: string[], problems:
     if (!present.has(section))
       problems.push({ file, line: 1, message: `section « ${section} » absente` });
   }
+}
+
+export function checkPrd(file: string, text: string): Problem[] {
+  const problems: Problem[] = [];
+  const all = lines(text);
+
+  if (!/^# PRD — \S/.test(all[0]?.text ?? '')) {
+    problems.push({ file, line: 1, message: 'le titre doit être « # PRD — Nom du produit »' });
+  }
+  checkStatus(file, text, PRD_STATUSES, problems);
+  checkSections(file, text, PRD_SECTIONS, problems);
+  if (all.length > MAX_PRD_LINES) {
+    problems.push({
+      file,
+      line: MAX_PRD_LINES + 1,
+      message: `le PRD fait ${all.length} lignes (${MAX_PRD_LINES} au plus) : une page suffit`,
+    });
+  }
+
+  const found = tranches(text);
+  const seen = new Set<string>();
+  for (const { id, line } of found) {
+    if (seen.has(id)) problems.push({ file, line, message: `tranche ${id} en double` });
+    seen.add(id);
+  }
+  if (found.length === 0) {
+    problems.push({ file, line: 1, message: 'aucune tranche (« ### TR1 — titre »)' });
+  }
+  return problems;
 }
 
 export function checkSpec(file: string, text: string, number: string): Problem[] {
