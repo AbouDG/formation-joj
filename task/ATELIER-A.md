@@ -1,8 +1,15 @@
 # Atelier A : le code et son CLAUDE.md
 
-**Horaire** : 10:15–11:15 (1 h). **Objectif** : comprendre la structure du dépôt et les bonnes pratiques qui y sont appliquées, les écrire noir sur blanc dans `CLAUDE.md`, puis constater que Claude les applique sans qu'on les lui répète.
+**Durée** : 1 h. **Objectif** : comprendre la structure du dépôt et les bonnes pratiques qui y sont appliquées, les écrire noir sur blanc dans `CLAUDE.md`, puis constater que Claude les applique sans qu'on les lui répète.
 
-## 10:15–10:35 · Plonger dans le code (20 min)
+## Avant de commencer
+
+- **Pas de nouvelle branche.** Tu restes sur `journee`, la branche de la journée créée au début de la [prise en main](EXERCICES.md) : `git branch --show-current` doit afficher `journee`.
+- **Garde ce qu'elle contient.** Le commit de la tâche B y reste : ne supprime pas la branche, ne la fusionne pas dans `main`, ne la remets pas à zéro. `CLAUDE.md`, puis les ateliers B et C, s'y ajoutent à la suite.
+- **L'arbre doit être propre** : `git status` ne montre rien (sinon `git stash -u`).
+- **La branche est sur GitHub.** Si `git push` répond qu'elle n'a pas de branche distante, envoie-la une fois vers ton fork : `git push -u origin journee`.
+
+## Plonger dans le code (20 min)
 
 Pose ces questions à Claude, une par une, et vérifie chaque réponse dans le code qu'il cite. **Note ce que tu repères** (sur papier ou dans un fichier que tu ne commiteras pas) : ces notes rempliront ton `CLAUDE.md`. Entre parenthèses, la rubrique du modèle qu'elles alimentent.
 
@@ -15,7 +22,7 @@ Pose ces questions à Claude, une par une, et vérifie chaque réponse dans le c
 
 Pour aller vite : le module modèle est dans `apps/api/src/modules/disciplines/`, et le [README du dépôt](../README.md) décrit l'ordre pour ajouter une fonctionnalité.
 
-## 10:35–10:45 · Pourquoi un CLAUDE.md
+## Pourquoi un CLAUDE.md (10 min)
 
 Ce qui manquait à l'agent « sans harness » de la démo d'ouverture, c'est le contexte du projet. `CLAUDE.md` est la mémoire permanente du projet : Claude le lit au début de chaque session. Il dit ce qui est vrai dans ce dépôt (architecture, conventions, nommage) et renvoie vers le détail. Il reste court : une ligne inutile coûte du contexte à chaque session.
 
@@ -29,9 +36,9 @@ Ce qui manquait à l'agent « sans harness » de la démo d'ouverture, c'est le 
 
 Le modèle [CLAUDE.modele.md](CLAUDE.modele.md) sert de guide de construction : cinq rubriques, chacune avec ce qu'il faut y écrire et un exemple.
 
-## 10:45–11:05 · Rédiger ton CLAUDE.md (20 min)
+## Rédiger ton CLAUDE.md (20 min)
 
-1. `git status` doit être propre. Tu travailles sur la branche de la journée (voir [EXERCICES.md](EXERCICES.md)).
+1. `git status` doit être propre, sur la branche `journee` (voir [Avant de commencer](#avant-de-commencer)).
 2. Copie le modèle à la racine du dépôt : `cp task/CLAUDE.modele.md CLAUDE.md`.
 3. Remplis les cinq rubriques : **méthodologie**, **architecture**, **concepts appréciés**, **bonnes pratiques**, **nommage**. Chaque rubrique contient un commentaire qui explique quoi écrire, et un exemple.
 4. Pars de tes notes d'exploration. Si une rubrique reste vide, demande à Claude ; c'est toi qui décides ce qui entre dans `CLAUDE.md`.
@@ -41,14 +48,14 @@ Le modèle [CLAUDE.modele.md](CLAUDE.modele.md) sert de guide de construction : 
 
 Ce qu'un bon `CLAUDE.md` contient : des règles vérifiables (« un controller n'appelle qu'un cas d'usage ») plutôt que des vœux (« écrire du code propre ») ; des chemins réels ; des renvois (« la méthode est dans `specs/constitution.md` ») plutôt que des copies.
 
-## 11:05–11:15 · Vérifier que Claude l'applique (10 min)
+## Vérifier que Claude l'applique (10 min)
 
 1. `/clear`, pour que Claude reparte de zéro et relise `CLAUDE.md`.
 2. Construis la **tâche A**, planifiée à la manipulation 2 de la [prise en main](EXERCICES.md) sans être codée. Donne seulement le besoin métier, sans aucune consigne technique (ni module modèle, ni cas d'usage, ni `AppError`, ni test) : c'est ton `CLAUDE.md` qui doit les apporter.
 
    « Ajoute `GET /api/disciplines/:id/similaires` : les autres disciplines de la même catégorie, triées par nom, sans la discipline elle-même. Si l'id est inconnu, 404. »
 
-3. Relis le diff et compare avec la tâche B du matin, dont le prompt donnait toutes les consignes techniques. Vérifie, pour chaque règle que ton `CLAUDE.md` écrit :
+3. Relis le diff et compare avec la tâche B de la prise en main, dont le prompt donnait toutes les consignes techniques. Vérifie, pour chaque règle que ton `CLAUDE.md` écrit :
    - un cas d'usage dans `application/use-cases/`, avec une méthode `execute()` ;
    - un controller fin, sans règle métier ;
    - le 404 levé par une `AppError` avec le code `DISCIPLINE_NOT_FOUND` ;
