@@ -45,9 +45,9 @@ Avant chaque manipulation : `git status` doit être propre (sinon `git stash -u`
 
 1. **Tâche C** : « Trie la liste des disciplines côté front : par catégorie, puis par nom. »
 2. Dès que Claude commence à modifier un fichier, appuie sur `Échap`. Redirige : « Seulement dans `discipline-list.tsx`, sans toucher à l'API. »
-3. Tape `/rewind`, choisis le message d'avant la tâche C, et restaure le code et la conversation. Hors de Claude, `git restore .` fait le même travail pour le code.
+3. Tape `/rewind` et choisis le message d'avant la tâche C (« Trie la liste des disciplines… »). Dans le menu, prends **Restore code and conversation** (la première option) : **Restore conversation** remet seulement l'échange en arrière et laisse les fichiers modifiés. `/rewind` n'annule que ce que Claude a modifié avec ses outils d'édition ; s'il est passé par une commande shell, ou si un fichier reste modifié, `git restore .` fait le travail hors de Claude.
 
-**Réussi si** après `/rewind`, `git status` ne montre plus les fichiers de la tâche C, et tu sais dire la différence entre `Échap` (interrompre) et `/rewind` (revenir en arrière).
+**Réussi si** après `/rewind`, `git status` ne montre plus les fichiers de la tâche C, tu sais dire la différence entre `Échap` (interrompre) et `/rewind` (revenir en arrière), et ce que restaure chacune des trois premières options du menu.
 
 ## 5. Contexte (3 min)
 
