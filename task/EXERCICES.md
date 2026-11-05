@@ -103,7 +103,9 @@ Vérifie d'abord que tu es en mode manuel : `⏸ manual mode on` sous la zone de
 2. Le hook refuse la commande, et Claude affiche son explication. S'il propose un autre message, **refuse** la permission (`No`) : le but est de voir le refus, pas de faire le commit.
 3. Ouvre `.claude/settings.json`, rubrique `hooks` : retrouve le script qui vient de refuser le commit.
 
-**Réussi si** tu sais dire ce qu'est un hook : un script qui s'exécute tout seul, à un moment précis, et qui s'impose à l'agent, qu'il y pense ou non.
+Ce hook ne contrôle que les commandes de Claude : le même commit, tapé par toi, passerait. Le hook git du dépôt (`lefthook.yml`), lui, s'applique à tout le monde, mais il vérifie le code (format, lint, types, tests), pas le message.
+
+**Réussi si** tu sais dire ce qu'est un hook : un script qui s'exécute tout seul, à un moment précis, et qui s'impose à l'agent, qu'il y pense ou non ; et tu sais dire à qui s'applique chacun des deux hooks du commit.
 
 ## 9. Sous-agent (2 min)
 
