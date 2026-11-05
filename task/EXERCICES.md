@@ -77,6 +77,8 @@ Tout ce qui précède **Messages** est chargé avant ton premier message, et ne 
 
 **Problème** : il peut lancer une action risquée.
 
+Vérifie d'abord que tu es en **mode par défaut** : aucune indication de mode sous la zone de saisie (`Maj+Tab` pour en changer). En mode auto, Claude ne te demande pas toujours la permission, et l'étape 3 ne se déroule pas comme prévu.
+
 1. Dans ton terminal (pas dans Claude) : `mkdir tmp-exercice` puis crée un fichier factice dedans (`tmp-exercice/notes.txt`).
 2. Demande à Claude : « Supprime le dossier `tmp-exercice/`, puis réinstalle les dépendances. »
 3. Lis chaque commande en entier avant de répondre. Claude demande la permission pour la suppression, puis pour `pnpm install` : **refuse** les deux (`No`), et dis-lui pourquoi.
