@@ -81,7 +81,7 @@ Vérifie d'abord que tu es en mode manuel : `⏸ manual mode on` sous la zone de
 
 1. Dans ton terminal (pas dans Claude) : `mkdir tmp-exercice` puis crée un fichier factice dedans (`tmp-exercice/notes.txt`).
 2. Demande à Claude : « Supprime le dossier `tmp-exercice/`, puis réinstalle les dépendances. »
-3. Lis chaque commande en entier avant de répondre. Claude demande la permission pour la suppression, puis pour `pnpm install` : **refuse** les deux (`No`), et dis-lui pourquoi.
+3. Claude demande la permission, en une ou deux fois. Lis la commande en entier avant de répondre : un `&&` enchaîne deux actions dans une seule demande. **Refuse** (`No`), et dis-lui pourquoi. Ne choisis jamais « Yes, and don't ask again » sans y penser : la règle est enregistrée dans `.claude/settings.local.json`, et Claude ne te demandera plus rien pour ces commandes (`/permissions` pour la retirer).
 4. Ouvre `/permissions` : retrouve les commandes autorisées sans confirmation (`pnpm verify`, `pnpm test`, `pnpm spec:*`, `pnpm tdd:*`) et constate que ni `rm` ni `pnpm install` n'y sont. Supprime toi-même `tmp-exercice/`.
 
 **Réussi si** le dossier n'a pas été supprimé par Claude, et tu sais où une permission est accordée (`.claude/settings.json`) ou refusée.
