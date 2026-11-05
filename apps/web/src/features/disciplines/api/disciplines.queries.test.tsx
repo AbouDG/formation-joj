@@ -29,12 +29,12 @@ const isInvalidated = (client: ReturnType<typeof createTestQueryClient>, key: re
   client.getQueryState(key)?.isInvalidated;
 
 describe('disciplines queries', () => {
-  it('AS5: loads the list validated by the shared schema', async () => {
+  it('000-AS5: loads the list validated by the shared schema', async () => {
     const { client } = makeWrapper();
     await expect(client.fetchQuery(disciplinesQueryOptions())).resolves.toEqual([lutte, natation]);
   });
 
-  it('AS1: useCreateDiscipline posts the input and invalidates the list', async () => {
+  it('000-AS1: useCreateDiscipline posts the input and invalidates the list', async () => {
     const { client, Wrapper } = makeWrapper();
     await client.ensureQueryData(disciplinesQueryOptions());
     const seen = trackRequests();
@@ -51,7 +51,7 @@ describe('disciplines queries', () => {
     expect(isInvalidated(client, disciplinesQueryOptions().queryKey)).toBe(true);
   });
 
-  it('AS7: useUpdateDiscipline invalidates the list and the detail', async () => {
+  it('000-AS7: useUpdateDiscipline invalidates the list and the detail', async () => {
     const { client, Wrapper } = makeWrapper();
     await client.ensureQueryData(disciplinesQueryOptions());
     await client.ensureQueryData(disciplineQueryOptions(lutte.id));
@@ -68,7 +68,7 @@ describe('disciplines queries', () => {
    * La page de détail quitte la discipline supprimée : relire son détail ferait un 404 pour
    * rien. Seule la liste est invalidée.
    */
-  it('AS10: useDeleteDiscipline invalidates the list and leaves the detail alone', async () => {
+  it('000-AS10: useDeleteDiscipline invalidates the list and leaves the detail alone', async () => {
     const { client, Wrapper } = makeWrapper();
     await client.ensureQueryData(disciplinesQueryOptions());
     await client.ensureQueryData(disciplineQueryOptions(lutte.id));
@@ -81,7 +81,7 @@ describe('disciplines queries', () => {
     expect(isInvalidated(client, disciplineQueryOptions(lutte.id).queryKey)).toBe(false);
   });
 
-  it('AS11: useDeleteDiscipline invalidates the list even when the deletion fails', async () => {
+  it('000-AS11: useDeleteDiscipline invalidates the list even when the deletion fails', async () => {
     const { client, Wrapper } = makeWrapper();
     await client.ensureQueryData(disciplinesQueryOptions());
 

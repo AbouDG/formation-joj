@@ -53,7 +53,7 @@ const PLAN_SECTIONS = [
   'Tâches',
 ];
 const MAX_PRD_LINES = 50;
-const MAX_SPEC_LINES = 60;
+const MAX_SPEC_LINES = 70;
 const MAX_TASKS = 6;
 
 const STATUS = /^\*\*Statut\*\*\s*:\s*(.*?)\s*$/;

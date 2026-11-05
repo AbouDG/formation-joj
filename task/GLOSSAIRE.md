@@ -47,7 +47,7 @@ Une requête traverse quatre **couches**, de l'extérieur vers l'intérieur. Cha
 - **PRD** : ta vision produit sur une page : pour qui, quel problème, ta solution, comment on saura que ça marche. Fichier `specs/prd-nom.md`.
 - **Tranche** (`TR1`, `TR2`) : une partie du PRD qui a de la valeur seule et se construit d'un bloc.
 - **Spec** : le quoi d'une tranche, sans technique (`specs/NNN-nom/spec.md`).
-- **Scénario d'acceptation** (`AS1`, `AS2`) : un exemple précis au format « Étant donné / Quand / Alors ». Chacun a un test dont le titre commence par son identifiant (`001-AS2: …`).
+- **Scénario d'acceptation** (`AS1`, `AS2`) : un exemple précis au format « Étant donné / Quand / Alors ». Chacun a un test dont le titre commence par son identifiant (`001-AS2: …`). Exemple complet : [`specs/000-disciplines/spec.md`](../specs/000-disciplines/spec.md), la spec du module modèle.
 - **Plan** : le comment : fichiers, tables, erreurs, tests et tâches (`specs/NNN-nom/plan.md`).
 - **Tâche** (`T01`, `T02`) : une étape du plan, réalisée en TDD et commitée seule.
 - **Constitution** : les six principes de la méthode (`specs/constitution.md`).

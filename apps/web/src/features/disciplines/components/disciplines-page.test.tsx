@@ -36,7 +36,7 @@ async function confirmDeletion(user: ReturnType<typeof userEvent.setup>, name: s
 }
 
 describe('DisciplinesPage', () => {
-  it('AS5: shows the disciplines returned by the API, sorted by name, with their category', async () => {
+  it('000-AS5: shows the disciplines returned by the API, sorted by name, with their category', async () => {
     await open();
 
     const list = await screen.findByRole('list', { name: 'Disciplines' });
@@ -45,13 +45,13 @@ describe('DisciplinesPage', () => {
     expect(items[0]).toHaveTextContent('Sports de combat');
   });
 
-  it('AS5: says when there is no discipline yet', async () => {
+  it('000-AS5: says when there is no discipline yet', async () => {
     fixture.disciplines = [];
     await open();
     expect(await screen.findByText('Aucune discipline pour l’instant.')).toBeInTheDocument();
   });
 
-  it('AS5: shows a loading state, then an error when the list cannot be loaded', async () => {
+  it('000-AS5: shows a loading state, then an error when the list cannot be loaded', async () => {
     mockControl.setLatency(50);
     mockControl.failNext('GET /api/disciplines');
     await open();
@@ -62,7 +62,7 @@ describe('DisciplinesPage', () => {
     );
   });
 
-  it('AS1: creates a discipline and shows it in the list', async () => {
+  it('000-AS1: creates a discipline and shows it in the list', async () => {
     const { user, seen } = await open();
     await screen.findByRole('list', { name: 'Disciplines' });
 
@@ -79,7 +79,7 @@ describe('DisciplinesPage', () => {
     ]);
   });
 
-  it('AS2: rejects a discipline without a name, without calling the API', async () => {
+  it('000-AS2: rejects a discipline without a name, without calling the API', async () => {
     const { user, seen } = await open();
     await screen.findByRole('list', { name: 'Disciplines' });
 
@@ -89,7 +89,7 @@ describe('DisciplinesPage', () => {
     expect(writes(seen)).toEqual([]);
   });
 
-  it('AS4: shows the API error when the name is already taken', async () => {
+  it('000-AS4: shows the API error when the name is already taken', async () => {
     const { user } = await open();
     await screen.findByRole('list', { name: 'Disciplines' });
 
@@ -98,7 +98,7 @@ describe('DisciplinesPage', () => {
     expect(await screen.findByRole('alert')).toHaveTextContent('Une discipline porte déjà ce nom.');
   });
 
-  it('AS6: opens the detail page of a discipline from the list', async () => {
+  it('000-AS6: opens the detail page of a discipline from the list', async () => {
     const { user } = await open();
 
     await user.click(await screen.findByRole('link', { name: 'Lutte' }));
@@ -106,7 +106,7 @@ describe('DisciplinesPage', () => {
     expect(await screen.findByRole('heading', { level: 1, name: 'Lutte' })).toBeInTheDocument();
   });
 
-  it('AS7: edits the name and the category of a discipline in place', async () => {
+  it('000-AS7: edits the name and the category of a discipline in place', async () => {
     const { user, seen } = await startEditing('Lutte');
 
     const name = screen.getByLabelText('Nouveau nom');
@@ -128,7 +128,7 @@ describe('DisciplinesPage', () => {
     ]);
   });
 
-  it('AS7: cancels an edit without calling the API', async () => {
+  it('000-AS7: cancels an edit without calling the API', async () => {
     const { user, seen } = await startEditing('Lutte');
 
     await user.type(screen.getByLabelText('Nouveau nom'), ' modifiée');
@@ -138,7 +138,7 @@ describe('DisciplinesPage', () => {
     expect(writes(seen)).toEqual([]);
   });
 
-  it('AS8: rejects an empty name in the edit form, without calling the API', async () => {
+  it('000-AS8: rejects an empty name in the edit form, without calling the API', async () => {
     const { user, seen } = await startEditing('Lutte');
 
     await user.clear(screen.getByLabelText('Nouveau nom'));
@@ -148,7 +148,7 @@ describe('DisciplinesPage', () => {
     expect(writes(seen)).toEqual([]);
   });
 
-  it('AS9: shows the API error when the new name is taken by another discipline', async () => {
+  it('000-AS9: shows the API error when the new name is taken by another discipline', async () => {
     const { user } = await startEditing('Lutte');
 
     await user.clear(screen.getByLabelText('Nouveau nom'));
@@ -159,7 +159,7 @@ describe('DisciplinesPage', () => {
     expect(screen.getByLabelText('Nouveau nom')).toHaveValue('Natation');
   });
 
-  it('AS10: deletes a discipline after confirmation and removes it from the list', async () => {
+  it('000-AS10: deletes a discipline after confirmation and removes it from the list', async () => {
     const { user, seen } = await open();
 
     await confirmDeletion(user, 'Lutte');
@@ -173,7 +173,7 @@ describe('DisciplinesPage', () => {
     ]);
   });
 
-  it('AS10: keeps the discipline when the deletion is cancelled', async () => {
+  it('000-AS10: keeps the discipline when the deletion is cancelled', async () => {
     const { user, seen } = await open();
 
     await user.click(await screen.findByRole('button', { name: 'Supprimer Lutte' }));
@@ -185,7 +185,7 @@ describe('DisciplinesPage', () => {
     expect(writes(seen)).toEqual([]);
   });
 
-  it('AS11: says when the discipline was deleted by someone else in the meantime', async () => {
+  it('000-AS11: says when the discipline was deleted by someone else in the meantime', async () => {
     const { user } = await open();
     await screen.findByRole('listitem', { name: 'Lutte' });
     // Supprimée côté serveur après l'affichage de la liste.

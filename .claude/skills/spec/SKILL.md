@@ -32,7 +32,7 @@ Lis `specs/constitution.md`, et le `CLAUDE.md` du dépôt s'il existe. Applique-
 - Des scénarios `### AS1 — titre`, `### AS2 — …`, chacun au format Étant donné / Quand / Alors. Le « Alors » est observable et vérifiable par un test : une valeur, un refus, un message.
 - Un scénario par règle métier, et un pour le cas nominal. Pas de scénario pour la plomberie.
 - Hors périmètre : ce que tu as choisi de ne pas faire.
-- 60 lignes au plus.
+- 70 lignes au plus.
 
 ## 5. Clarifier
 

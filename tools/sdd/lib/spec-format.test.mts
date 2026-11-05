@@ -62,9 +62,9 @@ describe('checkSpec', () => {
     assert.match(messages(checkSpec('spec.md', none, '001')).join(), /aucun scénario/);
   });
 
-  it('limits the spec to 60 lines', () => {
+  it('limits the spec to 70 lines', () => {
     const long = SPEC + '\n'.repeat(40);
-    assert.match(messages(checkSpec('spec.md', long, '001')).join(), /73 lignes \(60 au plus\)/);
+    assert.match(messages(checkSpec('spec.md', long, '001')).join(), /73 lignes \(70 au plus\)/);
   });
 
   it('checks that the title carries the number of the folder', () => {

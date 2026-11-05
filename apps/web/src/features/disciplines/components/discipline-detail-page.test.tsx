@@ -16,7 +16,7 @@ async function open(id: string) {
 }
 
 describe('DisciplineDetailPage', () => {
-  it('AS6: shows the name, the category and the creation date of a discipline', async () => {
+  it('000-AS6: shows the name, the category and the creation date of a discipline', async () => {
     await open(lutte.id);
 
     expect(await screen.findByRole('heading', { level: 1, name: 'Lutte' })).toBeInTheDocument();
@@ -28,7 +28,7 @@ describe('DisciplineDetailPage', () => {
     );
   });
 
-  it('AS7: edits the discipline from its detail page', async () => {
+  it('000-AS7: edits the discipline from its detail page', async () => {
     const { user, seen } = await open(lutte.id);
 
     await user.click(await screen.findByRole('button', { name: 'Modifier' }));
@@ -48,7 +48,7 @@ describe('DisciplineDetailPage', () => {
     ]);
   });
 
-  it('AS10: deletes the discipline after confirmation and goes back to the list', async () => {
+  it('000-AS10: deletes the discipline after confirmation and goes back to the list', async () => {
     const { user, seen, router } = await open(lutte.id);
 
     await user.click(await screen.findByRole('button', { name: 'Supprimer Lutte' }));
@@ -63,7 +63,7 @@ describe('DisciplineDetailPage', () => {
     ]);
   });
 
-  it('AS11: says when the discipline does not exist', async () => {
+  it('000-AS11: says when the discipline does not exist', async () => {
     await open(UNKNOWN_ID);
 
     expect(await screen.findByRole('alert')).toHaveTextContent('Cette discipline n’existe plus.');

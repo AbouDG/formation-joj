@@ -16,7 +16,7 @@ function setup() {
 }
 
 describe('DeleteDisciplineButton', () => {
-  it('AS10: asks for confirmation, naming the discipline, before calling onConfirm', async () => {
+  it('000-AS10: asks for confirmation, naming the discipline, before calling onConfirm', async () => {
     const { onConfirm, user } = setup();
 
     await user.click(screen.getByRole('button', { name: 'Supprimer Lutte' }));
@@ -28,7 +28,7 @@ describe('DeleteDisciplineButton', () => {
     expect(onConfirm).toHaveBeenCalledOnce();
   });
 
-  it('AS10: does nothing when the dialog is dismissed with Escape', async () => {
+  it('000-AS10: does nothing when the dialog is dismissed with Escape', async () => {
     const { onConfirm, user } = setup();
 
     await user.click(screen.getByRole('button', { name: 'Supprimer Lutte' }));

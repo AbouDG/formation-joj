@@ -14,7 +14,7 @@ describe('/api/disciplines (e2e)', () => {
 
   afterAll(() => app?.close());
 
-  it('AS1: creates a valid discipline (201) and returns it', async () => {
+  it('000-AS1: creates a valid discipline (201) and returns it', async () => {
     const response = await api()
       .post('/api/disciplines')
       .send({ name: ' Lutte ', category: 'sports-de-combat' })
@@ -26,7 +26,7 @@ describe('/api/disciplines (e2e)', () => {
     });
   });
 
-  it('AS2: rejects a discipline without a name (400, RFC 9457)', async () => {
+  it('000-AS2: rejects a discipline without a name (400, RFC 9457)', async () => {
     const response = await api()
       .post('/api/disciplines')
       .send({ name: '', category: 'athletisme' })
@@ -37,7 +37,7 @@ describe('/api/disciplines (e2e)', () => {
     expect(response.body.errors).toEqual([expect.objectContaining({ path: 'name' })]);
   });
 
-  it('AS3: rejects a category outside the list (400)', async () => {
+  it('000-AS3: rejects a category outside the list (400)', async () => {
     const response = await api()
       .post('/api/disciplines')
       .send({ name: 'Échecs', category: 'jeux' })
@@ -46,7 +46,7 @@ describe('/api/disciplines (e2e)', () => {
     expect(response.body.errors).toEqual([expect.objectContaining({ path: 'category' })]);
   });
 
-  it('AS4: rejects a name already taken (409)', async () => {
+  it('000-AS4: rejects a name already taken (409)', async () => {
     const body = { name: 'Natation', category: 'sports-nautiques' };
     await api().post('/api/disciplines').send(body).expect(201);
 
@@ -58,7 +58,7 @@ describe('/api/disciplines (e2e)', () => {
     });
   });
 
-  it('AS5: lists disciplines sorted by name', async () => {
+  it('000-AS5: lists disciplines sorted by name', async () => {
     await api().post('/api/disciplines').send({ name: 'Athletisme', category: 'athletisme' });
 
     const response = await api().get('/api/disciplines').expect(200);

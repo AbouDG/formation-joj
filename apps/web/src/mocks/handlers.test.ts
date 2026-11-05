@@ -15,13 +15,13 @@ const call = (path: string, init: RequestInit = {}) =>
 const json = (body: unknown) => JSON.stringify(body);
 
 describe('mock disciplines API', () => {
-  it('AS5: lists the disciplines sorted by name', async () => {
+  it('000-AS5: lists the disciplines sorted by name', async () => {
     const response = await call('/api/disciplines');
     expect(response.status).toBe(200);
     expect(await response.json()).toEqual([lutte, natation]);
   });
 
-  it('AS1: creates a discipline, then lists it', async () => {
+  it('000-AS1: creates a discipline, then lists it', async () => {
     const created = await call('/api/disciplines', {
       method: 'POST',
       body: json({ name: 'Escrime', category: 'sports-de-combat' }),
@@ -35,7 +35,7 @@ describe('mock disciplines API', () => {
     expect(names).toEqual(['Escrime', 'Lutte', 'Natation']);
   });
 
-  it('AS2: rejects an empty name with a 400 VALIDATION_FAILED problem', async () => {
+  it('000-AS2: rejects an empty name with a 400 VALIDATION_FAILED problem', async () => {
     const response = await call('/api/disciplines', {
       method: 'POST',
       body: json({ name: '', category: 'athletisme' }),
@@ -48,7 +48,7 @@ describe('mock disciplines API', () => {
     });
   });
 
-  it('AS4: rejects a taken name with a 409 DISCIPLINE_NAME_TAKEN problem', async () => {
+  it('000-AS4: rejects a taken name with a 409 DISCIPLINE_NAME_TAKEN problem', async () => {
     const response = await call('/api/disciplines', {
       method: 'POST',
       body: json({ name: 'Lutte', category: 'sports-de-combat' }),
@@ -57,12 +57,12 @@ describe('mock disciplines API', () => {
     expect(await response.json()).toMatchObject({ code: 'DISCIPLINE_NAME_TAKEN' });
   });
 
-  it('AS6: returns one discipline by id', async () => {
+  it('000-AS6: returns one discipline by id', async () => {
     const response = await call(`/api/disciplines/${lutte.id}`);
     expect(await response.json()).toEqual(lutte);
   });
 
-  it('AS7: updates only the fields sent', async () => {
+  it('000-AS7: updates only the fields sent', async () => {
     const response = await call(`/api/disciplines/${lutte.id}`, {
       method: 'PATCH',
       body: json({ name: 'Lutte sénégalaise' }),
@@ -70,7 +70,7 @@ describe('mock disciplines API', () => {
     expect(await response.json()).toEqual({ ...lutte, name: 'Lutte sénégalaise' });
   });
 
-  it('AS9: rejects a rename to the name of another discipline with a 409', async () => {
+  it('000-AS9: rejects a rename to the name of another discipline with a 409', async () => {
     const response = await call(`/api/disciplines/${lutte.id}`, {
       method: 'PATCH',
       body: json({ name: 'Natation' }),
@@ -78,14 +78,14 @@ describe('mock disciplines API', () => {
     expect(response.status).toBe(409);
   });
 
-  it('AS10: deletes a discipline with a 204', async () => {
+  it('000-AS10: deletes a discipline with a 204', async () => {
     const response = await call(`/api/disciplines/${lutte.id}`, { method: 'DELETE' });
     expect(response.status).toBe(204);
     expect((await call(`/api/disciplines/${lutte.id}`)).status).toBe(404);
   });
 
   it.each(['GET', 'PATCH', 'DELETE'])(
-    'AS11: answers %s on an unknown id with a 404 DISCIPLINE_NOT_FOUND problem',
+    '000-AS11: answers %s on an unknown id with a 404 DISCIPLINE_NOT_FOUND problem',
     async (method) => {
       const response = await call(`/api/disciplines/${UNKNOWN_ID}`, {
         method,

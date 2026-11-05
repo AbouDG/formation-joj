@@ -6,7 +6,7 @@ const NOW = new Date('2026-10-31T09:00:00.000Z');
 const ID = '0199f5c2-0000-7000-8000-000000000001';
 
 describe('Discipline', () => {
-  it('AS1: creates a discipline with a trimmed name and a listed category', () => {
+  it('000-AS1: creates a discipline with a trimmed name and a listed category', () => {
     const discipline = Discipline.create({
       id: ID,
       name: '  Lutte  ',
@@ -21,19 +21,19 @@ describe('Discipline', () => {
     });
   });
 
-  it.each(['', '   '])('AS2: rejects a discipline without a name (%j)', (name) => {
+  it.each(['', '   '])('000-AS2: rejects a discipline without a name (%j)', (name) => {
     expect(() => Discipline.create({ id: ID, name, category: 'athletisme', now: NOW })).toThrow(
       expect.objectContaining({ code: 'DISCIPLINE_NAME_REQUIRED', kind: 'VALIDATION' }),
     );
   });
 
-  it('AS2: rejects a name that is too long', () => {
+  it('000-AS2: rejects a name that is too long', () => {
     expect(() =>
       Discipline.create({ id: ID, name: 'x'.repeat(101), category: 'athletisme', now: NOW }),
     ).toThrow(expect.objectContaining({ code: 'DISCIPLINE_NAME_TOO_LONG' }));
   });
 
-  it('AS3: rejects a category outside the list', () => {
+  it('000-AS3: rejects a category outside the list', () => {
     expect(() => Discipline.create({ id: ID, name: 'Échecs', category: 'jeux', now: NOW })).toThrow(
       DisciplineError,
     );
@@ -45,7 +45,7 @@ describe('Discipline', () => {
   const lutte = () =>
     Discipline.create({ id: ID, name: 'Lutte', category: 'sports-de-combat', now: NOW });
 
-  it('AS7: renames a discipline with a trimmed name and changes its category', () => {
+  it('000-AS7: renames a discipline with a trimmed name and changes its category', () => {
     const discipline = lutte();
     discipline.rename('  Lutte sénégalaise ');
     discipline.changeCategory('athletisme');
@@ -57,7 +57,7 @@ describe('Discipline', () => {
     });
   });
 
-  it('AS8: applies the creation rules to an update', () => {
+  it('000-AS8: applies the creation rules to an update', () => {
     const discipline = lutte();
     expect(() => discipline.rename('  ')).toThrow(
       expect.objectContaining({ code: 'DISCIPLINE_NAME_REQUIRED' }),

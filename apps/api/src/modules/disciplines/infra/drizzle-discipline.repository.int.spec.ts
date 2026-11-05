@@ -19,7 +19,7 @@ describe('DrizzleDisciplineRepository (in-memory PGlite, migrations applied)', (
 
   afterAll(() => connection?.close());
 
-  it('AS1: reads back exactly what it wrote', async () => {
+  it('000-AS1: reads back exactly what it wrote', async () => {
     const discipline = newDiscipline('Aviron', new Date('2026-10-31T09:00:00.123Z'));
     await repository.insert(discipline);
 
@@ -27,14 +27,14 @@ describe('DrizzleDisciplineRepository (in-memory PGlite, migrations applied)', (
     expect(await repository.findByName('Inconnue')).toBeNull();
   });
 
-  it('AS4: turns the name unique constraint into a domain error', async () => {
+  it('000-AS4: turns the name unique constraint into a domain error', async () => {
     await repository.insert(newDiscipline('Escrime'));
     await expect(repository.insert(newDiscipline('Escrime'))).rejects.toMatchObject({
       code: 'DISCIPLINE_NAME_TAKEN',
     });
   });
 
-  it('AS5: lists sorted by name', async () => {
+  it('000-AS5: lists sorted by name', async () => {
     await repository.insert(newDiscipline('Zumba'));
     await repository.insert(newDiscipline('Badminton'));
     const names = (await repository.list()).map((discipline) => discipline.name);
@@ -42,7 +42,7 @@ describe('DrizzleDisciplineRepository (in-memory PGlite, migrations applied)', (
     expect(names).toEqual(expect.arrayContaining(['Badminton', 'Zumba']));
   });
 
-  it('AS6: finds a discipline by its id', async () => {
+  it('000-AS6: finds a discipline by its id', async () => {
     const discipline = newDiscipline('Judo');
     await repository.insert(discipline);
 
@@ -50,7 +50,7 @@ describe('DrizzleDisciplineRepository (in-memory PGlite, migrations applied)', (
     expect(await repository.findById(randomUUID())).toBeNull();
   });
 
-  it('AS7: writes a new name and a new category', async () => {
+  it('000-AS7: writes a new name and a new category', async () => {
     const discipline = newDiscipline('Voile');
     await repository.insert(discipline);
 
@@ -64,7 +64,7 @@ describe('DrizzleDisciplineRepository (in-memory PGlite, migrations applied)', (
     });
   });
 
-  it('AS9: turns the name unique constraint into a domain error on update', async () => {
+  it('000-AS9: turns the name unique constraint into a domain error on update', async () => {
     await repository.insert(newDiscipline('Karaté'));
     const other = newDiscipline('Taekwondo');
     await repository.insert(other);
@@ -75,7 +75,7 @@ describe('DrizzleDisciplineRepository (in-memory PGlite, migrations applied)', (
     });
   });
 
-  it('AS10: deletes a discipline and says whether it existed', async () => {
+  it('000-AS10: deletes a discipline and says whether it existed', async () => {
     const discipline = newDiscipline('Cyclisme');
     await repository.insert(discipline);
 
