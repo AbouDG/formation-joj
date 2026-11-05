@@ -53,9 +53,23 @@ Avant chaque manipulation : `git status` doit être propre (sinon `git stash -u`
 
 **Problème** : il sature et oublie le début de la conversation.
 
-1. `/context` : note la part du contexte utilisée.
-2. `/compact` : la conversation est résumée. Relance `/context` et compare.
+1. `/context` : note la part du contexte utilisée (la ligne `56.2k/400k tokens (14%)`, par exemple). Un token est un morceau de mot : 1 000 tokens font environ 700 mots.
+2. `/compact` : la conversation est résumée. Relance `/context` et compare la ligne **Messages** : c'est la seule qui baisse.
 3. `/clear`, puis demande « quelle route as-tu planifiée à la tâche A ? ». Claude ne s'en souvient plus : le plan n'a jamais été écrit dans le dépôt. La route de la tâche B, elle, est commitée : il la retrouve en lisant le code. Seul ce qui est écrit dans le dépôt survit à `/clear` : c'est le rôle du `CLAUDE.md` de l'atelier A.
+
+Comment lire `/context` : la grille de symboles est une jauge (une case, environ 1 %), et le détail par catégorie se lit ainsi :
+
+| Ligne                              | Ce que c'est                                                                                          |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| System prompt, System tools        | les instructions de Claude Code et la description de ses outils (lire, modifier, lancer une commande) |
+| MCP tools, MCP server instructions | les outils de services externes branchés à Claude ; absentes si tu n'en as pas                        |
+| Custom agents                      | les sous-agents disponibles, dont le `relecteur` du dépôt (`.claude/agents/`)                         |
+| Skills                             | le nom et la description de chaque skill ; leur contenu n'est chargé que quand on les appelle         |
+| Messages                           | la conversation : tes messages, ses réponses, et surtout ce que ses outils ont lu (fichiers, sorties) |
+| Free space                         | la place libre                                                                                        |
+| Autocompact buffer                 | une réserve : quand la conversation l'atteint, Claude lance `/compact` tout seul                      |
+
+Tout ce qui précède **Messages** est chargé avant ton premier message, et ne bouge pas avec `/compact` ni `/clear`.
 
 **Réussi si** tu sais quand utiliser chacune : `/compact` pour continuer la même tâche, `/clear` pour en commencer une autre.
 
