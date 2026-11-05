@@ -99,8 +99,8 @@ Vérifie d'abord que tu es en mode manuel : `⏸ manual mode on` sous la zone de
 
 **Problème** : il « oublie » une règle obligatoire.
 
-1. Demande à Claude : « fais un commit vide (`--allow-empty`) avec le message ajout compteur ».
-2. Le hook refuse ce message, et Claude explique pourquoi. S'il propose un autre message, refuse la permission (`No`).
+1. Demande à Claude : « fais un commit vide (`--allow-empty`) avec **exactement** le message `ajout compteur`, sans le modifier ».
+2. Le hook refuse la commande, et Claude affiche son explication. S'il propose un autre message, **refuse** la permission (`No`) : le but est de voir le refus, pas de faire le commit.
 3. Ouvre `.claude/settings.json`, rubrique `hooks` : retrouve le script qui vient de refuser le commit.
 
 **Réussi si** tu sais dire ce qu'est un hook : un script qui s'exécute tout seul, à un moment précis, et qui s'impose à l'agent, qu'il y pense ou non.
