@@ -1,6 +1,6 @@
 # Prise en main : comprendre et utiliser Claude Code
 
-**Horaire** : 09:40–10:10 (30 min). **Objectif** : savoir à quoi sert chaque fonctionnalité de Claude Code, et l'avoir utilisée sur ce dépôt. Chaque manipulation part d'un problème : ce que l'agent fait mal si on le laisse faire, et ce qui le corrige. Le cycle `/spec` des ateliers B et C n'est pas au programme.
+**Durée** : 30 min. **Objectif** : savoir à quoi sert chaque fonctionnalité de Claude Code, et l'avoir utilisée sur ce dépôt. Chaque manipulation part d'un problème : ce que l'agent fait mal si on le laisse faire, et ce qui le corrige. Le cycle `/spec` des ateliers B et C n'est pas au programme.
 
 **Avant de commencer**, lis [README.md](README.md) et le [glossaire](GLOSSAIRE.md) de ce dossier : ils donnent les mots du projet (couche, cas d'usage, `AppError`…) que Claude emploie dès la première manipulation.
 
@@ -115,10 +115,10 @@ Ce hook ne contrôle que les commandes de Claude : le même commit, tapé par to
 
 **Réussi si** tu sais dire ce qu'est un sous-agent : un second agent, avec son propre rôle et son propre contexte. `/converge` le lance aux ateliers B et C pour relire ton travail.
 
-## Quiz (10:10)
+## Quiz (2 min)
 
 « Quelle différence entre une skill et un hook ? À quel problème répond chacun ? »
 
 ## Et ensuite
 
-À 10:15, l'[atelier A](ATELIER-A.md) : écrire le `CLAUDE.md` du projet. Sa vérification construit la tâche A, cette fois sans consignes techniques : c'est ton `CLAUDE.md` qui les donne.
+L'[atelier A](ATELIER-A.md) : écrire le `CLAUDE.md` du projet. Sa vérification construit la tâche A, cette fois sans consignes techniques : c'est ton `CLAUDE.md` qui les donne.

@@ -1,23 +1,23 @@
 # Atelier C : construire ton application
 
-**Horaire** : 13:15–16:30. **Objectif** : partir d'un problème réel des Jeux, imaginer ta solution, la défendre dans un PRD, puis la construire seul avec la méthode du matin. À 16:15, ton application démarre, et la première tranche de ton PRD est couverte par des tests verts.
+**Durée** : 3 h 15. **Objectif** : partir d'un problème réel des Jeux, imaginer ta solution, la défendre dans un PRD, puis la construire seul avec la méthode de l'atelier B. Au gel, ton application démarre, et la première tranche de ton PRD est couverte par des tests verts.
 
 Personne ne te dit quoi construire. Ta table reçoit un problème et des données ; la solution est la tienne. Ce qui est exigé, c'est qu'elle réponde au problème, que tu saches dire pourquoi, et qu'elle soit livrée avec la méthode.
 
-Tu repars du dépôt du matin, sur ta branche de la journée, avec ton `CLAUDE.md`. Chacun a son propre dépôt ; les participants d'une même table ont le même problème et peuvent s'entraider (challenger un PRD, relire une spec, débloquer un test), mais chacun construit sa propre application.
+Tu repars du dépôt des ateliers A et B, sur ta branche de la journée, avec ton `CLAUDE.md`. Chacun a son propre dépôt ; les participants d'une même table ont le même problème et peuvent s'entraider (challenger un PRD, relire une spec, débloquer un test), mais chacun construit sa propre application.
 
 ## Le déroulé
 
-| Horaire     | Ce que tu fais                                                                                                                           |
+| Durée       | Ce que tu fais                                                                                                                           |
 | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| 13:15–13:25 | Consignes. Ton coach présente le problème de ta table.                                                                                   |
-| 13:25–13:50 | `/clear`, puis `/prd` : ta vision, challengée par Claude. Le problème, pour qui, ta solution, et son découpage en tranches.              |
-| 13:50–14:05 | **Challenge** : un voisin relit ton PRD avec la [grille](GRILLE-RELECTURE.md), puis ton coach valide ta tranche 1. Tu valides après lui. |
-| 14:05–14:20 | `/spec TR1` : la spec de ta première tranche. Ton coach la relit vite : le PRD a déjà été challengé.                                     |
-| 14:20–14:40 | `/spec-plan`, validation, puis `/tdd-task T01` : la première tâche seulement.                                                            |
-| 14:40       | **Point coach** : si ta première tâche n'est pas au vert, ton coach réduit la tranche avec toi.                                          |
-| 14:40–16:15 | `/tdd-task` pour les tâches suivantes, puis `/converge`. La tranche 2 si tu as fini (`/spec TR2`).                                       |
-| 16:15–16:30 | **Gel** : dernier commit, et trois lignes en tête de `README.md` (le problème et pour qui, comment lancer l'application, ce qui manque). |
+| 10 min      | Consignes. Ton coach présente le problème de ta table.                                                                                   |
+| 25 min      | `/clear`, puis `/prd` : ta vision, challengée par Claude. Le problème, pour qui, ta solution, et son découpage en tranches.              |
+| 15 min      | **Challenge** : un voisin relit ton PRD avec la [grille](GRILLE-RELECTURE.md), puis ton coach valide ta tranche 1. Tu valides après lui. |
+| 15 min      | `/spec TR1` : la spec de ta première tranche. Ton coach la relit vite : le PRD a déjà été challengé.                                     |
+| 20 min      | `/spec-plan`, validation, puis `/tdd-task T01` : la première tâche seulement.                                                            |
+| après `T01` | **Point coach** : si ta première tâche n'est pas au vert, ton coach réduit la tranche avec toi.                                          |
+| 1 h 35      | `/tdd-task` pour les tâches suivantes, puis `/converge`. La tranche 2 si tu as fini (`/spec TR2`).                                       |
+| 15 min      | **Gel** : dernier commit, et trois lignes en tête de `README.md` (le problème et pour qui, comment lancer l'application, ce qui manque). |
 
 ## Ton PRD
 
@@ -31,13 +31,13 @@ Le PRD est ta vision produit, sur une page. C'est toi qui l'écris : Claude le m
 
 Ton texte pour `/prd` dit tout ça avec tes mots, en quelques phrases. Il n'a pas besoin d'être complet : ce qui manque, Claude te le demandera. Pour la forme, regarde le texte de l'atelier B.
 
-**Le challenge.** Un PRD validé par son seul auteur ne vaut rien. À 13:50, tu échanges ton PRD avec un voisin de table : chacun relit celui de l'autre avec les cinq questions PRD de la [grille de relecture](GRILLE-RELECTURE.md), et le défend face à ses « non ». Ton coach tranche ensuite deux points : ta vision répond-elle au problème de la table, et ta tranche 1 tient-elle en 2 heures ? Tu peux changer d'avis sur ta solution à ce moment-là : c'est fait pour.
+**Le challenge.** Un PRD validé par son seul auteur ne vaut rien. Une fois ton PRD écrit, tu l'échanges avec un voisin de table : chacun relit celui de l'autre avec les cinq questions PRD de la [grille de relecture](GRILLE-RELECTURE.md), et le défend face à ses « non ». Ton coach tranche ensuite deux points : ta vision répond-elle au problème de la table, et ta tranche 1 tient-elle en 2 heures ? Tu peux changer d'avis sur ta solution à ce moment-là : c'est fait pour.
 
 ## Les règles
 
 - **Une page de PRD et une page de spec au plus** (`pnpm spec:check` le vérifie). La tranche 1 a **une ou deux règles métier**. Une tranche trop ambitieuse ne tient pas en 2 heures de code : c'est l'erreur la plus fréquente.
 - **La spec suit le PRD.** Elle réalise une tranche, et rien d'autre. Une nouvelle idée en cours de route va d'abord dans le PRD.
-- **Tu pars du dépôt du matin** et tu suis le module `disciplines` comme modèle. Pas de nouvelle dépendance sans l'accord de ton coach, sauf le SDK Claude (voir plus bas).
+- **Tu pars du dépôt des ateliers A et B** et tu suis le module `disciplines` comme modèle. Pas de nouvelle dépendance sans l'accord de ton coach, sauf le SDK Claude (voir plus bas).
 - **Une API d'abord.** Un écran seulement quand l'API de ta tranche est verte, et s'il reste du temps.
 - **Les données fournies** sont dans `task/donnees/<thème>/`. Tu n'es pas obligé de tout utiliser, et tu peux créer tes propres tables. Pour charger un fichier : quand ta table existe, copie-le dans `apps/api/data/` en le nommant comme ta table (`02-resultats.json` → table `resultats`), adapte les noms de colonnes si besoin, puis `pnpm db:seed` (après avoir arrêté `pnpm dev`). Les données sont fictives.
 - **À court d'idées après 10 minutes** : ouvre les [pistes](PISTES-ATELIER-C.md), ou demande-les à ton coach. Ce sont des points de départ, pas des consignes.
@@ -56,7 +56,7 @@ Tu as des crédits pour l'API Claude : ton application peut appeler Claude, par 
 
 ## Comment les projets sont choisis
 
-À 16:15, les coachs choisissent trois projets, un par thème, présentés devant l'auditoire de 16:30 à 17:00 (5 minutes de démo, 2 minutes de questions). Quatre critères :
+Au gel, les coachs choisissent trois projets, un par thème, présentés ensuite devant l'auditoire (5 minutes de démo, 2 minutes de questions). Quatre critères :
 
 1. **Vision produit** : le problème est précis, la solution y répond, et la démo commence par lui.
 2. **Respect du PRD et de la spec** : ce qui est livré correspond à la tranche validée et à ses scénarios.
@@ -95,7 +95,7 @@ Pour une tranche qui utilise Claude, dis ce que fait l'assistant et les règles 
 /spec TR1 Poser une question en langage courant et recevoir jusqu'à trois animations du jour qui y répondent, avec une phrase d'explication pour chacune. Les explications sont rédigées par un assistant IA. Une question vide est refusée : refus 400 avec le code QUESTION_EMPTY. Seules des animations du jour qui existent sont proposées : une proposition inconnue est écartée. Pas d'écran : seulement l'API.
 ```
 
-## À 16:30
+## À la fin de l'atelier
 
 - `git log --oneline` : le PRD et la spec validés, puis un commit par tâche.
 - `pnpm check` est vert, et `pnpm dev` démarre l'application.
