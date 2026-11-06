@@ -1,7 +1,7 @@
 ---
 name: prd
-description: Met en forme la vision produit de l'utilisateur dans un PRD d'une page (problème, utilisateurs, proposition, mesure du succès, tranches) dans specs/prd-nom.md, en la challengeant sans la remplacer, puis s'arrête pour validation humaine. À lancer par l'utilisateur avec /prd <son idée>, avant /spec.
-argument-hint: <le problème et la solution que tu imagines>
+description: Met en forme la vision produit complète de l'utilisateur dans un PRD d'une page (problème, utilisateurs, proposition, mesure du succès, tranches) dans specs/prd-nom.md, en la challengeant sans la remplacer, puis s'arrête pour validation humaine. Si le PRD existe déjà, l'amende au lieu d'en créer un second. À lancer par l'utilisateur avec /prd <son idée>, avant /spec, ou /prd <la modification> pour amender.
+argument-hint: <le problème et la solution que tu imagines, ou la modification du PRD>
 ---
 
 # /prd : écrire et challenger la vision produit
@@ -15,6 +15,8 @@ Ton rôle : un product manager exigeant. La vision est celle de l'utilisateur ; 
 Lis `specs/constitution.md`, et le `CLAUDE.md` du dépôt s'il existe. Applique-les sans les recopier.
 
 Si la demande est vide, demande à l'utilisateur, en une phrase, quel problème il veut résoudre et pour qui. N'écris rien d'autre.
+
+**Le PRD de ce produit existe déjà** (`specs/prd-*.md`) : la demande l'amende. N'en crée pas un second, passe directement à la section 6. Un PRD d'un autre produit (celui de l'atelier B, par exemple) n'est pas concerné : écris le nouveau. Si tu ne sais pas lequel la demande vise, demande-le, en une question.
 
 ## 2. Challenger avant d'écrire
 
@@ -34,7 +36,7 @@ Si la demande couvre déjà chaque section, ne pose pas de question : écris, et
 
 - Nom court en kebab-case, sans accent : `benevoles`, `guide-dakar`. Copie le modèle dans `specs/prd-nom.md`.
 - **Aucune technique** : ni route, ni table, ni code HTTP, ni nom de bibliothèque. On écrit pour un utilisateur, pas pour un développeur.
-- **Les tranches** : `### TR1 — titre`, `### TR2 — …`. La première est la plus petite qui ait de la valeur seule, et tient dans le temps de l'atelier (2 heures de code à l'atelier C). Les suivantes sont facultatives.
+- **Les tranches** couvrent toute la vision : `### TR1 — titre`, `### TR2 — …`. Elles seront réalisées une à une, une spec par tranche, dans l'ordre. La première est la plus petite qui ait de la valeur seule, et tient dans le temps de l'atelier (2 heures de code à l'atelier C) ; les suivantes disent où va le produit.
 - Ce que l'utilisateur n'a pas dit et que tu as dû supposer va dans « Hypothèses et risques », marqué comme tel.
 - 50 lignes au plus : une page.
 
@@ -56,3 +58,15 @@ Puis demande-lui de relire `specs/prd-nom.md` avec la [grille de relecture](../.
 Sur accord explicite seulement : remplace `**Statut** : Brouillon` par `**Statut** : Validé`, relance `pnpm spec:check specs/prd-nom.md`, puis `git add specs/prd-nom.md && git commit -m "docs(prd): add validated prd <nom>"`, et termine par :
 
 > PRD validé. Prochaine étape : `/spec TR1`
+
+## 6. Amender un PRD existant
+
+Le PRD évolue au fil des tranches : une tranche réduite au point coach, une idée arrivée en cours de route. On le modifie ; on n'en écrit pas un autre.
+
+1. Lis le PRD, et les specs qui le citent (ligne `**PRD** : specs/prd-nom.md, TRn`).
+2. Applique la modification demandée, et seulement elle. Challenge-la comme à la section 2 si elle touche le problème, les utilisateurs ou la tranche 1 : au plus 3 questions.
+3. **Ne renumérote ni ne supprime une tranche citée par une spec.** Une nouvelle tranche prend le numéro suivant. Si la modification change une tranche qui a déjà une spec, dis-le : cette spec devra être revue avant d'être réalisée.
+4. Repasse le statut à `**Statut** : Brouillon`, puis vérifie comme à la section 4.
+5. Montre à l'utilisateur ce qui a changé (tranches ajoutées, réduites ou modifiées) et les specs concernées, puis arrête-toi comme à la section 5 : le PRD amendé se relit et se valide à nouveau.
+
+Sur accord explicite seulement : `**Statut** : Validé`, `pnpm spec:check specs/prd-nom.md`, puis `git add specs/prd-nom.md && git commit -m "docs(prd): amend prd <nom>"`, et termine par la prochaine étape : `/spec TRn` pour la tranche suivante à réaliser.

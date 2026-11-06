@@ -26,7 +26,7 @@ Ce que l'utilisateur peut faire à la fin de cette tranche, et sa ou ses règles
 
 ### TR2 — titre
 
-La suite, si le temps le permet.
+La suite de la vision, réalisée après TR1. Autant de tranches que le produit en demande.
 
 ## Hors périmètre
 
