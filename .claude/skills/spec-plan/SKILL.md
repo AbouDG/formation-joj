@@ -23,7 +23,7 @@ Copie `.claude/skills/spec-plan/plan-template.md` dans le dossier de la spec et 
 1. **Résumé** : trois à cinq phrases (ce qu'on construit, ce que l'utilisateur pourra faire à la fin, le découpage en tâches, ce qui est laissé de côté), puis le tableau des mots de la spec et de leur nom dans le code.
 2. **Fichiers par couche** : shared → domain → application → infra → http → web. Seulement ce qu'il faut pour les scénarios. Pour chaque route : méthode, chemin, effet et réponse.
 3. **Données** : tables, colonnes, contraintes (unicité, clés étrangères), et la règle que chaque contrainte protège.
-4. **Erreurs** : une ligne par refus métier. Code stable en majuscules, catégorie AppError (VALIDATION 400, NOT_FOUND 404, CONFLICT 409, BUSINESS_RULE 422), situation, scénario.
+4. **Erreurs** : une ligne par refus métier. Code stable en majuscules, catégorie AppError (VALIDATION 400, NOT_FOUND 404, CONFLICT 409, BUSINESS_RULE 422), situation, scénario. Quand la spec donne le code et le statut d'un refus, reprends-les tels quels, avec la catégorie qui donne ce statut.
 5. **Tests par scénario** : chaque `ASn` de la spec a une ligne, avec fichier, niveau (unitaire, intégration, e2e, écran) et ce que le test vérifie. Choisis le niveau le plus bas qui prouve le « Alors ».
 6. **Tâches** : six au plus, dans l'ordre des couches, format `- [ ] T01 [NNN-AS1] Écrire d'abord <fichier de test> (« NNN-AS1: … »), puis <code>`. Une tâche tient dans un commit et cite les scénarios qu'elle fait avancer : `[NNN-AS2]`, ou `[NNN-AS2, AS3, AS4]` si son test en couvre plusieurs (une route qui porte plusieurs règles). Le front fait une tâche à part entière s'il est dans la spec.
 
