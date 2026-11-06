@@ -1,25 +1,54 @@
 # Atelier C : construire ton application
 
-**Durée** : 3 h 15. **Objectif** : partir d'un problème réel des Jeux, imaginer ta solution, la défendre dans un PRD, puis la construire seul avec la méthode de l'atelier B. Au gel, ton application démarre, et la première tranche de ton PRD est couverte par des tests verts.
+**Durée** : 3 h 15.
 
-Personne ne te dit quoi construire. Ta table reçoit un problème et des données ; la solution est la tienne. Ce qui est exigé, c'est qu'elle réponde au problème, que tu saches dire pourquoi, et qu'elle soit livrée avec la méthode.
+## L'objectif
 
-Tu repars du dépôt des ateliers A et B, sur ta branche de la journée, avec ton `CLAUDE.md`. Chacun a son propre dépôt ; les participants d'une même table ont le même problème et peuvent s'entraider (challenger un PRD, relire une spec, débloquer un test), mais chacun construit sa propre application.
+Partir du problème de ta table, imaginer ta solution, la défendre dans un PRD, puis la construire seul avec la méthode de l'atelier B.
 
-## Le déroulé
+Personne ne te dit quoi construire. Ta table reçoit un problème ; la solution est la tienne. Ce qui est exigé, c'est qu'elle réponde au problème, que tu saches dire pourquoi, et qu'elle soit livrée avec la méthode.
 
-| Durée       | Ce que tu fais                                                                                                                           |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| 10 min      | Consignes. Ton coach présente le problème de ta table.                                                                                   |
-| 25 min      | `/clear`, puis `/prd` : ta vision complète, challengée par Claude. Le problème, pour qui, ta solution, et son découpage en tranches.     |
-| 15 min      | **Challenge** : un voisin relit ton PRD avec la [grille](GRILLE-RELECTURE.md), puis ton coach valide ta tranche 1. Tu valides après lui. |
-| 15 min      | `/spec TR1` : la spec de ta première tranche. Ton coach la relit vite : le PRD a déjà été challengé.                                     |
-| 20 min      | `/spec-plan`, validation, puis `/tdd-task T01` : la première tâche seulement.                                                            |
-| après `T01` | **Point coach** : si ta première tâche n'est pas au vert, ton coach réduit la tranche avec toi, et tu amendes le PRD.                    |
-| 1 h 35      | `/tdd-task` pour les tâches suivantes, puis `/converge`. La tranche suivante si tu as fini (`/spec TR2`).                                |
-| 15 min      | **Gel** : dernier commit, et trois lignes en tête de `README.md` (le problème et pour qui, comment lancer l'application, ce qui manque). |
+Tu repars du dépôt des ateliers A et B, sur ta branche `journee`, avec ton `CLAUDE.md`. Chacun a son propre dépôt ; les participants d'une même table ont le même problème et peuvent s'entraider (challenger un PRD, relire une spec, débloquer un test), mais chacun construit sa propre application.
 
-## Ton PRD
+**Réussi si**, à la fin de l'atelier :
+
+- ton PRD décrit tout ton produit en tranches, et il est validé ;
+- la tranche 1 est livrée : chaque scénario de sa spec a son test (`pnpm spec:check specs/NNN-nom --trace`), et `pnpm check` est vert ;
+- `pnpm dev` démarre l'application, et la démo se montre en moins de 5 minutes ;
+- trois lignes en tête de `README.md` disent le problème et pour qui, comment lancer l'application, et ce qui manque.
+
+## Les trois thèmes
+
+### Thème 1 : Résultats et médailles
+
+Pendant les Jeux, les épreuves s'enchaînent sur plusieurs sites. Le public veut savoir qui a gagné aujourd'hui et où en est son pays ; les journalistes doivent publier vite, et vérifient les résultats à la main d'une source à l'autre. Une erreur de podium, une fois publiée, se corrige mal.
+
+### Thème 2 : Guide touristique de Dakar
+
+Des milliers de visiteurs et de supporters sont à Dakar pour les Jeux, souvent pour la première fois. Entre deux épreuves, ils ont quelques heures devant eux et ne savent pas quoi faire, ni où : les animations sont annoncées un peu partout, et rien ne dit ce qui est proche, ce qui se passe maintenant, ou ce qui vaut le détour.
+
+### Thème 3 : Mobilité et covoiturage
+
+Pendant le pic de l'événement, l'accès aux sites olympiques (Dakar, Diamniadio, Saly) est saturé : les navettes sont pleines, les taxis rares et chers. Pourtant, beaucoup de voitures partent vers les mêmes sites avec des places vides, et les supporters ne savent pas qui part, d'où, ni quand.
+
+## Tes outils, et quand les utiliser
+
+| Quand                                   | Outil                                         | Pour quoi                                                                      |
+| --------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------ |
+| au début, et avant chaque nouvelle spec | `/clear`                                      | repartir d'une conversation vide                                               |
+| pour décrire ta solution                | `/prd <ta vision>`                            | écrire le PRD de tout ton produit, challengé par Claude                        |
+| si tu n'as pas d'idée                   | les [pistes](PISTES-ATELIER-C.md)             | des points de départ, pas des consignes                                        |
+| avant chaque « je valide »              | la [grille de relecture](GRILLE-RELECTURE.md) | relire le PRD, la spec ou le plan : un seul « non » suffit pour ne pas valider |
+| pour chaque tranche, dans l'ordre       | `/spec TRn <précisions>`                      | écrire la spec d'une tranche                                                   |
+| une fois la spec validée                | `/spec-plan`                                  | écrire le plan technique                                                       |
+| une fois le plan validé                 | `/tdd-task`, ou `/tdd-task Tnn`               | construire, test d'abord, un commit par tâche                                  |
+| quand toutes les tâches sont cochées    | `/converge`                                   | vérifier que la tranche est finie, avec un relecteur indépendant               |
+| quand ta vision change                  | `/prd <la modification>`                      | amender le PRD existant                                                        |
+| si ta solution a besoin d'IA            | l'API Claude                                  | résumer, répondre en langage courant, lire un message libre                    |
+
+Le détail de chaque commande est dans l'[atelier B](ATELIER-B.md) et dans la section « Méthode » du [README](../README.md#méthode).
+
+### Ton PRD : `/prd`
 
 Le PRD est ta vision produit, sur une page. C'est toi qui l'écris : Claude le met en forme, te pose des questions et te dit où il est faible, mais il ne choisit pas à ta place. Pour l'écrire, pars du problème, pas de la solution :
 
@@ -33,64 +62,7 @@ Le PRD est ta vision produit, sur une page. C'est toi qui l'écris : Claude le m
 
 Ton texte pour `/prd` dit tout ça avec tes mots, en quelques phrases. Il n'a pas besoin d'être complet : ce qui manque, Claude te le demandera. Pour la forme, regarde le texte de l'atelier B.
 
-**Le challenge.** Un PRD validé par son seul auteur ne vaut rien. Une fois ton PRD écrit, tu l'échanges avec un voisin de table : chacun relit celui de l'autre avec les cinq questions PRD de la [grille de relecture](GRILLE-RELECTURE.md), et le défend face à ses « non ». Ton coach tranche ensuite deux points : ta vision répond-elle au problème de la table, et ta tranche 1 tient-elle en 2 heures ? Tu peux changer d'avis sur ta solution à ce moment-là : c'est fait pour.
-
-**Faire évoluer ton PRD.** Une fois validé, ton PRD n'est pas figé : il évolue au fil des tranches. Deux cas sont fréquents : ton coach réduit la tranche 1 au point coach, ou une idée arrive en cours de route. Dans les deux cas, tu modifies le PRD existant, tu n'en écris pas un autre :
-
-1. Lance `/prd` avec la modification, par exemple : `/prd Réduire TR1 : la seconde règle passe dans une nouvelle tranche TR3.`
-2. Claude amende le PRD et le repasse en `Brouillon`. Il ne renumérote pas les tranches qui ont déjà une spec, et te dit lesquelles sont concernées.
-3. Relis la modification avec la grille, fais-la valider par ton coach, puis écris « je valide » : Claude commite l'amendement.
-4. Si une tranche qui a déjà une spec a changé, demande à Claude de mettre à jour sa spec, puis son plan, et revalide-les avant de reprendre `/tdd-task`.
-
-## Les règles
-
-- **Une page de PRD et une page de spec au plus** (`pnpm spec:check` le vérifie). La tranche 1 a **une ou deux règles métier**. Une tranche trop ambitieuse ne tient pas en 2 heures de code : c'est l'erreur la plus fréquente.
-- **La spec suit le PRD.** Elle réalise une tranche, et rien d'autre. Une nouvelle idée en cours de route va d'abord dans le PRD, avec `/prd` (voir « Faire évoluer ton PRD »).
-- **Tu pars du dépôt des ateliers A et B** et tu suis le module `disciplines` comme modèle. Pas de nouvelle dépendance sans l'accord de ton coach, sauf le SDK Claude (voir plus bas).
-- **Une API d'abord.** Un écran seulement quand l'API de ta tranche est verte, et s'il reste du temps.
-- **Les données fournies** sont dans `task/donnees/<thème>/`. Tu n'es pas obligé de tout utiliser, et tu peux créer tes propres tables. Pour charger un fichier : quand ta table existe, copie-le dans `apps/api/data/` en le nommant comme ta table (`02-resultats.json` → table `resultats`), adapte les noms de colonnes si besoin, puis `pnpm db:seed` (après avoir arrêté `pnpm dev`). Les données sont fictives.
-- **À court d'idées après 10 minutes** : ouvre les [pistes](PISTES-ATELIER-C.md), ou demande-les à ton coach. Ce sont des points de départ, pas des consignes.
-- **Bloqué plus de 10 minutes** : appelle ton coach. Un problème technique (licence, crédits API, réseau, installation) part chez le référent technique.
-
-## Si ta solution utilise Claude
-
-Tu as des crédits pour l'API Claude : ton application peut appeler Claude, par exemple pour résumer, répondre à une question en langage courant ou lire un message libre. C'est un choix de solution comme un autre : ton PRD dit pourquoi l'IA aide ton utilisateur, et le challenge le vérifiera. La réponse de Claude change d'un appel à l'autre ; tes règles non.
-
-- **Ta tranche garde une règle métier que l'application applique elle-même**, autour de la réponse de Claude (par exemple : on ne propose que des lieux qui existent). La spec teste ces règles, pas ce que Claude doit « bien » répondre.
-- **La clé reste dans `apps/api/.env`** : `ANTHROPIC_API_KEY=sk-ant-…`, que tu colles toi-même. Ce fichier est ignoré par git, et le hook refuse d'écrire une clé ailleurs. Ne la colle jamais dans la conversation avec Claude Code. L'API charge ce fichier au démarrage, et le SDK y lit la clé.
-- **Le SDK officiel** est la seule dépendance ajoutée : `pnpm --filter @joj/api add @anthropic-ai/sdk`. Modèle : `claude-opus-5-5`.
-- **Les tests n'appellent jamais Claude.** L'appel est derrière un port dans `application/`, comme `DisciplineRepository` : une classe abstraite (par exemple `AssistantTouristique`), un faux dans `application/testing/` qui renvoie une réponse fixée par le test, et l'implémentation avec le SDK dans `infra/`. Les tests restent rapides, gratuits et reproductibles ; `pnpm check` tourne sans clé ni réseau.
-- **Demande une réponse structurée** (du JSON validé par un schéma Zod) plutôt que du texte à découper : ton cas d'usage contrôle ensuite chaque champ comme une donnée venue de l'extérieur.
-- **Ménage tes crédits.** Tu essaies l'appel réel à la main, dans Swagger, quelques fois : pas en boucle, pas dans les tests.
-
-## Comment les projets sont choisis
-
-Au gel, les coachs choisissent trois projets, un par thème, présentés ensuite devant l'auditoire (5 minutes de démo, 2 minutes de questions). Quatre critères :
-
-1. **Vision produit** : le problème est précis, la solution y répond, et la démo commence par lui.
-2. **Respect du PRD et de la spec** : ce qui est livré correspond à la tranche validée et à ses scénarios.
-3. **Tests** : chaque scénario a son test (`pnpm spec:check specs/NNN-nom --trace`), et `pnpm check` est vert.
-4. **Démo qui fonctionne** : elle démarre avec `pnpm dev` et se montre en moins de 5 minutes.
-
-## Thème 1 : Résultats et médailles
-
-**Le problème.** Pendant les Jeux, les épreuves s'enchaînent sur plusieurs sites. Le public veut savoir qui a gagné aujourd'hui et où en est son pays ; les journalistes doivent publier vite, et vérifient les résultats à la main d'une source à l'autre. Une erreur de podium, une fois publiée, se corrige mal.
-
-**Les données** (`task/donnees/medailles/`) : `01-pays.json` (code à trois lettres et nom de 12 pays) et `02-resultats.json` (12 épreuves avec la date et les pays médaillés d'or, d'argent et de bronze).
-
-## Thème 2 : Guide touristique de Dakar
-
-**Le problème.** Des milliers de visiteurs et de supporters sont à Dakar pour les Jeux, souvent pour la première fois. Entre deux épreuves, ils ont quelques heures devant eux et ne savent pas quoi faire, ni où : les animations sont annoncées un peu partout, et rien ne dit ce qui est proche, ce qui se passe maintenant, ou ce qui vaut le détour.
-
-**Les données** (`task/donnees/guide-touristique/`) : `01-lieux.json` (12 lieux avec leur quartier et leur type : site olympique, culture, marché, nature…) et `02-animations.json` (24 animations avec leur lieu, leur début et leur fin, pendant les Jeux).
-
-## Thème 3 : Mobilité et covoiturage
-
-**Le problème.** Pendant le pic de l'événement, l'accès aux sites olympiques (Dakar, Diamniadio, Saly) est saturé : les navettes sont pleines, les taxis rares et chers. Pourtant, beaucoup de voitures partent vers les mêmes sites avec des places vides, et les supporters ne savent pas qui part, d'où, ni quand.
-
-**Les données** (`task/donnees/mobilite/`) : `01-sites.json` (4 sites olympiques et leur ville) et `02-trajets.json` (20 trajets proposés, avec le conducteur, le quartier de départ, le site d'arrivée, l'heure de départ et le nombre de places).
-
-## Écrire ta spec
+### Ta spec : `/spec TRn`
 
 Une fois ton PRD validé, ton texte pour `/spec` cite la tranche, puis précise ses règles avec la réponse attendue de l'API (statut et code d'erreur en majuscules) et ce qui est hors périmètre. Par exemple, pour une tranche de réservation :
 
@@ -104,9 +76,38 @@ Pour une tranche qui utilise Claude, dis ce que fait l'assistant et les règles 
 /spec TR1 Poser une question en langage courant et recevoir jusqu'à trois animations du jour qui y répondent, avec une phrase d'explication pour chacune. Les explications sont rédigées par un assistant IA. Une question vide est refusée : refus 400 avec le code QUESTION_EMPTY. Seules des animations du jour qui existent sont proposées : une proposition inconnue est écartée. Pas d'écran : seulement l'API.
 ```
 
+Puis `/spec-plan`, `/tdd-task` et `/converge`, comme à l'atelier B. Quand une tranche répond « Converged », passe à la suivante : `/clear`, puis `/spec TR2 …`.
+
+### Faire évoluer ton PRD : `/prd <la modification>`
+
+Une fois validé, ton PRD n'est pas figé : il évolue au fil des tranches, quand une tranche se révèle trop grosse ou qu'une idée arrive en cours de route. Tu modifies le PRD existant, tu n'en écris pas un autre :
+
+1. Lance `/prd` avec la modification, par exemple : `/prd Réduire TR1 : la seconde règle passe dans une nouvelle tranche TR3.`
+2. Claude amende le PRD et le repasse en `Brouillon`. Il ne renumérote pas les tranches qui ont déjà une spec, et te dit lesquelles sont concernées.
+3. Relis la modification avec la grille, puis écris « je valide » : Claude commite l'amendement.
+4. Si une tranche qui a déjà une spec a changé, demande à Claude de mettre à jour sa spec, puis son plan, et revalide-les avant de reprendre `/tdd-task`.
+
+### L'API Claude dans ton application
+
+Tu as des crédits pour l'API Claude : ton application peut appeler Claude, par exemple pour résumer, répondre à une question en langage courant ou lire un message libre. C'est un choix de solution comme un autre : ton PRD dit pourquoi l'IA aide ton utilisateur. La réponse de Claude change d'un appel à l'autre ; tes règles non.
+
+- **Ta tranche garde une règle métier que l'application applique elle-même**, autour de la réponse de Claude (par exemple : on ne propose que des lieux qui existent). La spec teste ces règles, pas ce que Claude doit « bien » répondre.
+- **La clé reste dans `apps/api/.env`** : `ANTHROPIC_API_KEY=sk-ant-…`, que tu colles toi-même. Ce fichier est ignoré par git, et le hook refuse d'écrire une clé ailleurs. Ne la colle jamais dans la conversation avec Claude Code. L'API charge ce fichier au démarrage, et le SDK y lit la clé.
+- **Le SDK officiel** est la seule dépendance ajoutée : `pnpm --filter @joj/api add @anthropic-ai/sdk`. Modèle : `claude-opus-5-5`.
+- **Les tests n'appellent jamais Claude.** L'appel est derrière un port dans `application/`, comme `DisciplineRepository` : une classe abstraite (par exemple `AssistantTouristique`), un faux dans `application/testing/` qui renvoie une réponse fixée par le test, et l'implémentation avec le SDK dans `infra/`. Les tests restent rapides, gratuits et reproductibles ; `pnpm check` tourne sans clé ni réseau.
+- **Demande une réponse structurée** (du JSON validé par un schéma Zod) plutôt que du texte à découper : ton cas d'usage contrôle ensuite chaque champ comme une donnée venue de l'extérieur.
+- **Ménage tes crédits.** Tu essaies l'appel réel à la main, dans Swagger, quelques fois : pas en boucle, pas dans les tests.
+
+## Les règles
+
+- **Une page de PRD et une page de spec au plus** (`pnpm spec:check` le vérifie). La tranche 1 a **une ou deux règles métier**. Une tranche trop ambitieuse ne tient pas en 2 heures de code : c'est l'erreur la plus fréquente.
+- **La spec suit le PRD.** Elle réalise une tranche, et rien d'autre. Une nouvelle idée en cours de route va d'abord dans le PRD, avec `/prd`.
+- **Tu suis le module `disciplines` comme modèle.** Pas de nouvelle dépendance, sauf le SDK Claude.
+- **Une API d'abord.** Un écran seulement quand l'API de ta tranche est verte, et s'il reste du temps.
+
 ## À la fin de l'atelier
 
-- `git log --oneline` : le PRD et la spec validés (et les amendements du PRD), puis un commit par tâche.
+- `git log --oneline` : le PRD validé (et ses amendements), la spec validée, puis un commit par tâche.
 - `pnpm check` est vert, et `pnpm dev` démarre l'application.
 - Les trois lignes en tête de `README.md` sont écrites.
-- Tu repars avec ton dépôt : ton `CLAUDE.md`, ton PRD, tes specs, tes tests et ton application.
+- `git push` : tu repars avec ton dépôt, ton `CLAUDE.md`, ton PRD, tes specs, tes tests et ton application.

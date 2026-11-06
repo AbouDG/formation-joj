@@ -2,7 +2,7 @@
 
 Un monorepo pnpm : une API NestJS, un front React et des schémas partagés. Une fonctionnalité d'exemple, **Disciplines**, montre toute la chaîne, du schéma partagé à l'écran.
 
-Les énoncés de la formation (prise en main, ateliers A, B et C, données des thèmes) et la description du projet sont dans [`task/`](task/README.md).
+Les énoncés de la formation (prise en main, ateliers A, B et C) et la description du projet sont dans [`task/`](task/README.md).
 
 ## Prérequis
 
@@ -64,7 +64,7 @@ apps/
 packages/
   shared/                   schémas Zod et types partagés par l'API et le front
 specs/                      constitution et specs des fonctionnalités (voir Méthode)
-task/                       énoncés de la formation : exercices, ateliers A, B, C, données, description du projet
+task/                       énoncés de la formation : exercices, ateliers A, B, C, description du projet
 tools/sdd/                  scripts des skills : spec:check, tdd:red, verify
 .claude/                    hooks, skills et sous-agent relecteur de Claude Code
 ```

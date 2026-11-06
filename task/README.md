@@ -2,16 +2,16 @@
 
 Ce dossier contient les énoncés de la journée. Ce fichier décrit le projet sur lequel tu vas travailler : ce que fait l'application, comment elle est construite, et ce qui a été mis en place pour développer avec Claude Code.
 
-| Fichier                                            | Quand           | Contenu                                                                                                                 |
-| -------------------------------------------------- | --------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| [GLOSSAIRE.md](GLOSSAIRE.md)                       | avant           | les mots du projet et de la méthode, avec un exemple pris dans le dépôt                                                 |
-| [EXERCICES.md](EXERCICES.md)                       | étape 1, 45 min | prise en main : neuf manipulations pour comprendre et utiliser Claude Code                                              |
-| [ATELIER-A.md](ATELIER-A.md)                       | étape 2, 1 h    | écrire le `CLAUDE.md` du projet, à partir de [CLAUDE.modele.md](CLAUDE.modele.md)                                       |
-| [ATELIER-B.md](ATELIER-B.md)                       | étape 3, 1 h    | une petite fonctionnalité imposée (Bénévoles) avec la méthode spec → plan → TDD                                         |
-| [ATELIER-C.md](ATELIER-C.md)                       | étape 4, 3 h 15 | ta solution au problème de ta table : ton PRD challengé, puis ton application, avec les données de [donnees/](donnees/) |
-| [PISTES-ATELIER-C.md](PISTES-ATELIER-C.md)         | atelier C       | des pistes, seulement si tu sèches après 10 minutes                                                                     |
-| [GRILLE-RELECTURE.md](GRILLE-RELECTURE.md)         | ateliers B et C | relire un PRD, une spec et un plan avant chaque « je valide »                                                           |
-| [POUR-ALLER-PLUS-LOIN.md](POUR-ALLER-PLUS-LOIN.md) | après           | une fonctionnalité de plus pour s'entraîner : le programme des épreuves                                                 |
+| Fichier                                            | Quand           | Contenu                                                                           |
+| -------------------------------------------------- | --------------- | --------------------------------------------------------------------------------- |
+| [GLOSSAIRE.md](GLOSSAIRE.md)                       | avant           | les mots du projet et de la méthode, avec un exemple pris dans le dépôt           |
+| [EXERCICES.md](EXERCICES.md)                       | étape 1, 45 min | prise en main : neuf manipulations pour comprendre et utiliser Claude Code        |
+| [ATELIER-A.md](ATELIER-A.md)                       | étape 2, 1 h    | écrire le `CLAUDE.md` du projet, à partir de [CLAUDE.modele.md](CLAUDE.modele.md) |
+| [ATELIER-B.md](ATELIER-B.md)                       | étape 3, 1 h    | une petite fonctionnalité imposée (Bénévoles) avec la méthode spec → plan → TDD   |
+| [ATELIER-C.md](ATELIER-C.md)                       | étape 4, 3 h 15 | ta solution au problème de ta table : ton PRD challengé, puis ton application     |
+| [PISTES-ATELIER-C.md](PISTES-ATELIER-C.md)         | atelier C       | des pistes, seulement si tu sèches après 10 minutes                               |
+| [GRILLE-RELECTURE.md](GRILLE-RELECTURE.md)         | ateliers B et C | relire un PRD, une spec et un plan avant chaque « je valide »                     |
+| [POUR-ALLER-PLUS-LOIN.md](POUR-ALLER-PLUS-LOIN.md) | après           | une fonctionnalité de plus pour s'entraîner : le programme des épreuves           |
 
 ## 1. L'application
 
