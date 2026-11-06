@@ -21,4 +21,4 @@ Ce qui se passe pendant la journée sans être du travail de l'apprenant. Les é
 
 ## Atelier B (11:15–12:15)
 
-- **11:15–11:35** : démonstration du cycle `/prd` → `/spec` → `/spec-plan` → `/tdd-task` → `/converge` sur Bénévoles.
+- **Pendant tout l'atelier** : construire Bénévoles avec les apprenants, à l'écran et étape par étape (`/prd` → `/spec` → `/spec-plan` → `/tdd-task` → `/converge`). S'arrêter à chaque « je valide » pour relire avec eux, avant qu'ils valident.
