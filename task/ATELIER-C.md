@@ -11,12 +11,12 @@ Tu repars du dépôt des ateliers A et B, sur ta branche de la journée, avec to
 | Durée       | Ce que tu fais                                                                                                                           |
 | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | 10 min      | Consignes. Ton coach présente le problème de ta table.                                                                                   |
-| 25 min      | `/clear`, puis `/prd` : ta vision, challengée par Claude. Le problème, pour qui, ta solution, et son découpage en tranches.              |
+| 25 min      | `/clear`, puis `/prd` : ta vision complète, challengée par Claude. Le problème, pour qui, ta solution, et son découpage en tranches.     |
 | 15 min      | **Challenge** : un voisin relit ton PRD avec la [grille](GRILLE-RELECTURE.md), puis ton coach valide ta tranche 1. Tu valides après lui. |
 | 15 min      | `/spec TR1` : la spec de ta première tranche. Ton coach la relit vite : le PRD a déjà été challengé.                                     |
 | 20 min      | `/spec-plan`, validation, puis `/tdd-task T01` : la première tâche seulement.                                                            |
-| après `T01` | **Point coach** : si ta première tâche n'est pas au vert, ton coach réduit la tranche avec toi.                                          |
-| 1 h 35      | `/tdd-task` pour les tâches suivantes, puis `/converge`. La tranche 2 si tu as fini (`/spec TR2`).                                       |
+| après `T01` | **Point coach** : si ta première tâche n'est pas au vert, ton coach réduit la tranche avec toi, et tu amendes le PRD.                    |
+| 1 h 35      | `/tdd-task` pour les tâches suivantes, puis `/converge`. La tranche suivante si tu as fini (`/spec TR2`).                                |
 | 15 min      | **Gel** : dernier commit, et trois lignes en tête de `README.md` (le problème et pour qui, comment lancer l'application, ce qui manque). |
 
 ## Ton PRD
@@ -27,16 +27,25 @@ Le PRD est ta vision produit, sur une page. C'est toi qui l'écris : Claude le m
 - **Comment fait-il aujourd'hui**, et qu'est-ce qui ne va pas ?
 - **Qu'est-ce que tu proposes**, et pourquoi ça plutôt qu'autre chose ?
 - **Comment saura-t-on que ça marche**, pendant ta démo ?
-- **Par quoi commences-tu ?** La tranche 1 est la plus petite chose qui ait de la valeur seule, et elle tient en 2 heures de code.
+- **Par quoi commences-tu, et où vas-tu ensuite ?** La tranche 1 est la plus petite chose qui ait de la valeur seule, et elle tient en 2 heures de code. Les tranches suivantes disent la suite de ta vision.
+
+**Le PRD décrit tout ton produit**, découpé en tranches `TR1`, `TR2`… Tu les réalises ensuite une à une, une spec par tranche, dans l'ordre. Seule la tranche 1 doit tenir dans l'atelier : les autres montrent où va ton produit, même si tu ne les construis pas aujourd'hui.
 
 Ton texte pour `/prd` dit tout ça avec tes mots, en quelques phrases. Il n'a pas besoin d'être complet : ce qui manque, Claude te le demandera. Pour la forme, regarde le texte de l'atelier B.
 
 **Le challenge.** Un PRD validé par son seul auteur ne vaut rien. Une fois ton PRD écrit, tu l'échanges avec un voisin de table : chacun relit celui de l'autre avec les cinq questions PRD de la [grille de relecture](GRILLE-RELECTURE.md), et le défend face à ses « non ». Ton coach tranche ensuite deux points : ta vision répond-elle au problème de la table, et ta tranche 1 tient-elle en 2 heures ? Tu peux changer d'avis sur ta solution à ce moment-là : c'est fait pour.
 
+**Faire évoluer ton PRD.** Une fois validé, ton PRD n'est pas figé : il évolue au fil des tranches. Deux cas sont fréquents : ton coach réduit la tranche 1 au point coach, ou une idée arrive en cours de route. Dans les deux cas, tu modifies le PRD existant, tu n'en écris pas un autre :
+
+1. Lance `/prd` avec la modification, par exemple : `/prd Réduire TR1 : la seconde règle passe dans une nouvelle tranche TR3.`
+2. Claude amende le PRD et le repasse en `Brouillon`. Il ne renumérote pas les tranches qui ont déjà une spec, et te dit lesquelles sont concernées.
+3. Relis la modification avec la grille, fais-la valider par ton coach, puis écris « je valide » : Claude commite l'amendement.
+4. Si une tranche qui a déjà une spec a changé, demande à Claude de mettre à jour sa spec, puis son plan, et revalide-les avant de reprendre `/tdd-task`.
+
 ## Les règles
 
 - **Une page de PRD et une page de spec au plus** (`pnpm spec:check` le vérifie). La tranche 1 a **une ou deux règles métier**. Une tranche trop ambitieuse ne tient pas en 2 heures de code : c'est l'erreur la plus fréquente.
-- **La spec suit le PRD.** Elle réalise une tranche, et rien d'autre. Une nouvelle idée en cours de route va d'abord dans le PRD.
+- **La spec suit le PRD.** Elle réalise une tranche, et rien d'autre. Une nouvelle idée en cours de route va d'abord dans le PRD, avec `/prd` (voir « Faire évoluer ton PRD »).
 - **Tu pars du dépôt des ateliers A et B** et tu suis le module `disciplines` comme modèle. Pas de nouvelle dépendance sans l'accord de ton coach, sauf le SDK Claude (voir plus bas).
 - **Une API d'abord.** Un écran seulement quand l'API de ta tranche est verte, et s'il reste du temps.
 - **Les données fournies** sont dans `task/donnees/<thème>/`. Tu n'es pas obligé de tout utiliser, et tu peux créer tes propres tables. Pour charger un fichier : quand ta table existe, copie-le dans `apps/api/data/` en le nommant comme ta table (`02-resultats.json` → table `resultats`), adapte les noms de colonnes si besoin, puis `pnpm db:seed` (après avoir arrêté `pnpm dev`). Les données sont fictives.
@@ -97,7 +106,7 @@ Pour une tranche qui utilise Claude, dis ce que fait l'assistant et les règles 
 
 ## À la fin de l'atelier
 
-- `git log --oneline` : le PRD et la spec validés, puis un commit par tâche.
+- `git log --oneline` : le PRD et la spec validés (et les amendements du PRD), puis un commit par tâche.
 - `pnpm check` est vert, et `pnpm dev` démarre l'application.
 - Les trois lignes en tête de `README.md` sont écrites.
 - Tu repars avec ton dépôt : ton `CLAUDE.md`, ton PRD, tes specs, tes tests et ton application.
