@@ -100,7 +100,7 @@ Chaque scénario de la spec est prouvé par au moins un test, au niveau le plus 
 
 Cinq tâches, dans l'ordre des couches ; chacune tient dans un commit.
 
-- [ ] T01 [001-AS1, AS3, AS4] Écrire d'abord `domain/slot.spec.ts` (« 001-AS3: rejects an end time not after the start time ») et `packages/shared/src/volunteers.spec.ts`, puis les schémas partagés, l'entité `Slot` (sans `register()`) et `volunteers.errors.ts`
+- [x] T01 [001-AS1, AS3, AS4] Écrire d'abord `domain/slot.spec.ts` (« 001-AS3: rejects an end time not after the start time ») et `packages/shared/src/volunteers.spec.ts`, puis les schémas partagés, l'entité `Slot` (sans `register()`) et `volunteers.errors.ts`
 - [ ] T02 [001-AS5, AS6, AS7] Écrire d'abord `domain/registration.spec.ts` (« 001-AS6: rejects a blank name ») et les cas `register()` de `domain/slot.spec.ts` (« 001-AS7: refuses a registration on a full slot »), puis l'entité `Registration` et `Slot.register()`
 - [ ] T03 [001-AS1, AS2, AS5, AS7, AS8] Écrire d'abord `application/volunteers.application.spec.ts` (« 001-AS2: refuses a slot for an unknown discipline »), puis le port `SlotRepository`, le repository en mémoire, `OpenSlot`, `RegisterVolunteer` et l'export de `GetDiscipline`
 - [ ] T04 [001-AS1, AS7] Écrire d'abord `infra/drizzle-slot.repository.int.spec.ts` (« 001-AS7: keeps the capacity under concurrent registrations »), puis les tables, la migration générée, les mappers et `DrizzleSlotRepository`
