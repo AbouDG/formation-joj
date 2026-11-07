@@ -25,3 +25,29 @@ export const registerVolunteerSchema = z.object({
   email: z.string().trim().max(VOLUNTEER_EMAIL_MAX_LENGTH).pipe(z.email()),
 });
 export type RegisterVolunteerInput = z.infer<typeof registerVolunteerSchema>;
+
+/** Paramètre `:id` des routes d'un créneau. */
+export const slotIdParamsSchema = z.object({ id: z.uuid() });
+
+/** Un créneau tel que l'API le renvoie, avec son nombre d'inscrits. */
+export const slotSchema = z.object({
+  id: z.uuid(),
+  disciplineId: z.uuid(),
+  date: z.iso.date(),
+  startTime: z.iso.time({ precision: -1 }),
+  endTime: z.iso.time({ precision: -1 }),
+  capacity: z.int(),
+  registeredCount: z.int(),
+  createdAt: z.iso.datetime(),
+});
+export type SlotResponse = z.infer<typeof slotSchema>;
+
+/** Une inscription telle que l'API la renvoie. */
+export const registrationSchema = z.object({
+  id: z.uuid(),
+  slotId: z.uuid(),
+  name: z.string(),
+  email: z.string(),
+  registeredAt: z.iso.datetime(),
+});
+export type RegistrationResponse = z.infer<typeof registrationSchema>;
