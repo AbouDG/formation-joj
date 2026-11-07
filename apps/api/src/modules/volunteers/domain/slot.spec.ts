@@ -55,3 +55,39 @@ describe('Slot', () => {
     );
   });
 });
+
+describe('Slot.register', () => {
+  const volunteer = (n: number) => ({
+    id: `0199f5c2-0000-7000-8000-00000000002${n}`,
+    name: `Bénévole ${n}`,
+    email: `benevole${n}@example.com`,
+    now: NOW,
+  });
+
+  it('001-AS5: registers a volunteer and counts one more', () => {
+    const slot = Slot.create(valid);
+    const registration = slot.register({ ...volunteer(1), name: ' Awa Ndiaye ' });
+
+    expect(registration).toMatchObject({ slotId: ID, name: 'Awa Ndiaye' });
+    expect(slot.registeredCount).toBe(1);
+  });
+
+  it('001-AS6: rejects a blank name and keeps the count', () => {
+    const slot = Slot.create(valid);
+    expect(() => slot.register({ ...volunteer(1), name: ' ' })).toThrow(
+      expect.objectContaining({ code: 'REGISTRATION_NAME_REQUIRED' }),
+    );
+    expect(slot.registeredCount).toBe(0);
+  });
+
+  it('001-AS7: refuses a registration on a full slot', () => {
+    const slot = Slot.create(valid);
+    slot.register(volunteer(1));
+    slot.register(volunteer(2));
+
+    expect(() => slot.register(volunteer(3))).toThrow(
+      expect.objectContaining({ code: 'SLOT_FULL', kind: 'CONFLICT' }),
+    );
+    expect(slot.registeredCount).toBe(2);
+  });
+});

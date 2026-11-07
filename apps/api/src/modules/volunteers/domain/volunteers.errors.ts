@@ -8,6 +8,11 @@ const VOLUNTEER_ERROR_KINDS = {
   SLOT_TIME_RANGE_INVALID: 'VALIDATION',
   /** Capacité nulle, négative ou non entière. */
   SLOT_CAPACITY_INVALID: 'VALIDATION',
+  /** Nom vide, ou fait seulement d'espaces. */
+  REGISTRATION_NAME_REQUIRED: 'VALIDATION',
+  REGISTRATION_EMAIL_INVALID: 'VALIDATION',
+  /** Le créneau compte déjà autant d'inscrits que sa capacité. */
+  SLOT_FULL: 'CONFLICT',
 } as const satisfies Record<string, ErrorKind>;
 
 export type VolunteerErrorCode = keyof typeof VOLUNTEER_ERROR_KINDS;
@@ -16,4 +21,11 @@ export class VolunteerError extends AppError<VolunteerErrorCode> {
   constructor(code: VolunteerErrorCode, message: string, details?: Record<string, unknown>) {
     super(code, VOLUNTEER_ERROR_KINDS[code], message, details);
   }
+}
+
+export function slotFull(id: string, capacity: number): VolunteerError {
+  return new VolunteerError('SLOT_FULL', `Slot ${id} is full (${capacity} volunteers)`, {
+    id,
+    capacity,
+  });
 }

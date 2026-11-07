@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { openSlotSchema } from './volunteers.ts';
+import { openSlotSchema, registerVolunteerSchema } from './volunteers.ts';
 
 const DISCIPLINE_ID = '0199f5c2-0000-7000-8000-000000000001';
 const valid = {
@@ -31,5 +31,23 @@ describe('openSlotSchema', () => {
 
   it.each([0, -1, 1.5])('001-AS4: rejects an invalid capacity (%j)', (capacity) => {
     expect(openSlotSchema.safeParse({ ...valid, capacity }).success).toBe(false);
+  });
+});
+
+describe('registerVolunteerSchema', () => {
+  it('001-AS5: accepts a name and an email, both trimmed', () => {
+    expect(
+      registerVolunteerSchema.parse({ name: ' Awa Ndiaye ', email: '  awa@example.com  ' }),
+    ).toEqual({ name: 'Awa Ndiaye', email: 'awa@example.com' });
+  });
+
+  it.each([
+    { name: '', email: 'awa@example.com' },
+    { name: '   ', email: 'awa@example.com' },
+    { name: 'x'.repeat(101), email: 'awa@example.com' },
+    { name: 'Awa Ndiaye', email: 'awa' },
+    { name: 'Awa Ndiaye', email: '' },
+  ])('001-AS6: rejects a blank name or a malformed email (%j)', (body) => {
+    expect(registerVolunteerSchema.safeParse(body).success).toBe(false);
   });
 });
